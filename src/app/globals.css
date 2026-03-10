@@ -1,26 +1,321 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  --color-fukusen-red: #dc2626;
+  --color-fukusen-gold: #f59e0b;
+  --color-bg-primary: #0a0a12;
+  --color-bg-surface: #14141e;
+  --color-bg-elevated: #1c1c28;
+  --color-border-default: #282838;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0a0a12;
+  color: #b0b0c0;
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  position: relative;
+}
+
+/* Screentone halftone dot pattern (manga texture) */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(circle, rgba(220,38,38,0.015) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Speed lines background for hero/banner sections */
+.speed-lines {
+  position: relative;
+  overflow: hidden;
+}
+.speed-lines::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: repeating-linear-gradient(
+    -55deg,
+    transparent,
+    transparent 12px,
+    rgba(220,38,38,0.04) 12px,
+    rgba(220,38,38,0.04) 13px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+.speed-lines > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Manga panel frame card */
+.manga-panel {
+  background: #14141e;
+  border: 2px solid #282838;
+  border-radius: 4px;
+  transition: all 0.25s ease;
+}
+.manga-panel:hover {
+  border-color: #dc2626;
+  box-shadow: 0 0 24px rgba(220,38,38,0.15), 0 4px 16px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+}
+
+/* Accent left border panel */
+.accent-panel {
+  border-left: 4px solid #dc2626;
+}
+
+/* Article content styles — dark foreshadowing theme (mobile-first) */
+.article-content h2 {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #eaeaf0;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 0.85rem;
+  border-left: 4px solid #dc2626;
+  border-bottom: none;
+  background: linear-gradient(to right, rgba(220,38,38,0.08), transparent);
+  position: relative;
+  line-height: 1.5;
+}
+
+.article-content h3 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #d0d0df;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid #f59e0b;
+}
+
+.article-content p {
+  font-size: 0.9375rem;
+  line-height: 2.1;
+  color: #c0c0d0;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.article-content strong {
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+/* Marker underlines */
+.article-content .marker {
+  background: linear-gradient(transparent 60%, rgba(220,38,38,0.3) 60%);
+  font-weight: 700;
+  color: #eaeaf0;
+  padding: 0 2px;
+}
+
+.article-content .marker-gold {
+  background: linear-gradient(transparent 60%, rgba(245,158,11,0.25) 60%);
+  font-weight: 700;
+  color: #f59e0b;
+  padding: 0 2px;
+}
+
+/* Summary box */
+.article-content .summary-box {
+  background: #18182a;
+  border: 2px solid #282838;
+  border-radius: 8px;
+  padding: 1.25rem 1.25rem 0.75rem;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.article-content .summary-box::before {
+  content: attr(data-title);
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 900;
+  color: #dc2626;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #282838;
+}
+
+.article-content .summary-box p {
+  font-size: 0.875rem;
+  line-height: 1.8;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.article-content .summary-box p::before {
+  content: '\25C9';
+  position: absolute;
+  left: 0;
+  color: #dc2626;
+  font-size: 0.75rem;
+}
+
+/* Highlight box (important points) */
+.article-content .highlight-box {
+  background: linear-gradient(135deg, rgba(220,38,38,0.08), rgba(245,158,11,0.06));
+  border: 2px solid rgba(220,38,38,0.25);
+  border-radius: 8px;
+  padding: 1.25rem 1.25rem;
+  margin: 2rem 0;
+  font-size: 0.9375rem;
+  line-height: 2;
+  color: #eaeaf0;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Note box */
+.article-content .note-box {
+  background: #18182a;
+  border: 1px solid #282838;
+  border-left: 4px solid #f59e0b;
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-size: 0.875rem;
+  color: #b0b0c0;
+  line-height: 1.8;
+}
+
+/* Speech bubble blockquote */
+.article-content blockquote {
+  background: #1c1c28;
+  border: 2px solid #282838;
+  border-left: 4px solid #dc2626;
+  border-radius: 2px 12px 12px 2px;
+  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+  margin: 2rem 0;
+  font-size: 0.9375rem;
+  color: #d0d0df;
+  position: relative;
+  line-height: 1.9;
+}
+.article-content blockquote::before {
+  content: '\275D';
+  position: absolute;
+  top: -6px;
+  left: 14px;
+  font-size: 1.4rem;
+  color: #dc2626;
+  line-height: 1;
+}
+
+/* Manga quote image */
+.article-content .manga-quote {
+  margin: 2rem 0;
+  text-align: center;
+}
+.article-content .manga-quote img {
+  max-width: 100%;
+  border: 2px solid #282838;
+  border-radius: 4px;
+}
+.article-content .manga-quote .cite {
+  display: block;
+  text-align: right;
+  font-size: 0.75rem;
+  color: #6a6a80;
+  margin-top: 0.5rem;
+}
+
+/* Mobile optimization */
+@media (max-width: 640px) {
+  .article-content h2 {
+    font-size: 1.125rem;
+    margin-top: 2.5rem;
+    padding: 0.625rem 0.75rem;
+  }
+  .article-content p {
+    font-size: 0.9375rem;
+    line-height: 2.2;
+    margin-bottom: 1.75rem;
+  }
+  .article-content blockquote {
+    padding: 1rem 1rem 1rem 1.25rem;
+    margin: 1.5rem 0;
+  }
+  .article-content .summary-box {
+    padding: 1rem 1rem 0.5rem;
+  }
+}
+
+/* Desktop adjustments */
+@media (min-width: 768px) {
+  .article-content h2 {
+    font-size: 1.375rem;
+  }
+  .article-content p {
+    font-size: 1rem;
+  }
+}
+
+/* Dark scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a12;
+}
+::-webkit-scrollbar-thumb {
+  background: #282838;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #383850;
+}
+
+/* Line clamp */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Rank badge in sidebar */
+.rank-badge {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.rank-1 { background: #dc2626; color: #fff; }
+.rank-2 { background: #f59e0b; color: #0a0a12; }
+.rank-3 { background: #d97706; color: #fff; }
+.rank-other { background: #282838; color: #6a6a80; }
+
+/* Diagonal stripe decoration */
+.diagonal-stripe {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 5px,
+    rgba(220,38,38,0.06) 5px,
+    rgba(220,38,38,0.06) 6px
+  );
 }
