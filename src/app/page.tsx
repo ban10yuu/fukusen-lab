@@ -15,8 +15,8 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero with speed lines */}
-      <section className="speed-lines bg-gradient-to-b from-[#0a0a12] via-[#10101a] to-[#0a0a12] py-16 border-b-2 border-[#1e1e2e]">
+      {/* Hero */}
+      <section className="bg-[#0c0c14] py-16 border-b-2 border-[#1e1e2e]">
         <div className="mx-auto max-w-7xl px-4">
           <div className="text-center mb-10">
             <p className="text-[#dc2626] text-xs font-black tracking-[0.3em] uppercase mb-3">
@@ -48,7 +48,7 @@ export default function Home() {
                       style={{ backgroundColor: manga?.coverColor }}
                     />
                     <span className="text-xs text-gray-500 font-medium">{manga?.title}</span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#dc2626]/20 text-[#dc2626] border border-[#dc2626]/30 ml-auto">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#dc2626] text-white ml-auto">
                       PICK UP
                     </span>
                   </div>

@@ -21,40 +21,6 @@ body {
   position: relative;
 }
 
-/* Screentone halftone dot pattern (manga texture) */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image: radial-gradient(circle, rgba(220,38,38,0.015) 1px, transparent 1px);
-  background-size: 16px 16px;
-}
-
-/* Speed lines background for hero/banner sections */
-.speed-lines {
-  position: relative;
-  overflow: hidden;
-}
-.speed-lines::before {
-  content: '';
-  position: absolute;
-  inset: -50%;
-  background: repeating-linear-gradient(
-    -55deg,
-    transparent,
-    transparent 12px,
-    rgba(220,38,38,0.04) 12px,
-    rgba(220,38,38,0.04) 13px
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-.speed-lines > * {
-  position: relative;
-  z-index: 2;
-}
 
 /* Manga panel frame card */
 .manga-panel {
@@ -65,8 +31,6 @@ body::before {
 }
 .manga-panel:hover {
   border-color: #dc2626;
-  box-shadow: 0 0 24px rgba(220,38,38,0.15), 0 4px 16px rgba(0,0,0,0.3);
-  transform: translateY(-2px);
 }
 
 /* Accent left border panel */
@@ -166,7 +130,7 @@ body::before {
 
 /* Highlight box (important points) */
 .article-content .highlight-box {
-  background: linear-gradient(135deg, rgba(220,38,38,0.08), rgba(245,158,11,0.06));
+  background: #1a1520;
   border: 2px solid rgba(220,38,38,0.25);
   border-radius: 8px;
   padding: 1.25rem 1.25rem;
@@ -191,27 +155,17 @@ body::before {
   line-height: 1.8;
 }
 
-/* Speech bubble blockquote */
+/* Blockquote */
 .article-content blockquote {
   background: #1c1c28;
   border: 2px solid #282838;
   border-left: 4px solid #dc2626;
-  border-radius: 2px 12px 12px 2px;
+  border-radius: 4px;
   padding: 1.25rem 1.25rem 1.25rem 1.5rem;
   margin: 2rem 0;
   font-size: 0.9375rem;
   color: #d0d0df;
-  position: relative;
   line-height: 1.9;
-}
-.article-content blockquote::before {
-  content: '\275D';
-  position: absolute;
-  top: -6px;
-  left: 14px;
-  font-size: 1.4rem;
-  color: #dc2626;
-  line-height: 1;
 }
 
 /* Manga quote image */

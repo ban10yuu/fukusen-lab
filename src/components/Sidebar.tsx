@@ -20,7 +20,7 @@ export default function Sidebar() {
       <AdBanner size="medium" />
 
       {/* Affiliate section */}
-      <div className="bg-[#14141e] rounded-xl border border-[#282838] p-4">
+      <div className="bg-[#14141e] rounded-lg border border-[#282838] p-4">
         <h3 className="font-bold text-sm text-[#eaeaf0] mb-3 flex items-center gap-2">
           <span className="text-[#f59e0b]">&#9632;</span> 電子書籍サービス
         </h3>
@@ -31,7 +31,7 @@ export default function Sidebar() {
               href={a.url}
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className="block p-3 rounded-lg transition-all hover:brightness-110 border border-transparent hover:border-[#282838]"
+              className="block p-3 rounded-lg transition-all border border-transparent hover:border-[#282838]"
               style={{
                 backgroundColor: `${a.color}15`,
                 borderLeftWidth: '3px',
@@ -64,7 +64,7 @@ export default function Sidebar() {
                   href={a.url}
                   target="_blank"
                   rel="noopener noreferrer nofollow"
-                  className="block p-3 rounded-lg transition-all hover:brightness-110 border border-transparent hover:border-[#282838]"
+                  className="block p-3 rounded-lg transition-all border border-transparent hover:border-[#282838]"
                   style={{
                     backgroundColor: `${a.color}15`,
                     borderLeftWidth: '3px',
@@ -92,7 +92,7 @@ export default function Sidebar() {
 
       {/* Popular articles ranking (10 items) */}
       {popular.length > 0 && (
-        <div className="bg-[#14141e] rounded-xl border border-[#282838] p-4">
+        <div className="bg-[#14141e] rounded-lg border border-[#282838] p-4">
           <h3 className="font-bold text-sm text-[#eaeaf0] mb-3 flex items-center gap-2">
             <span className="text-[#dc2626]">&#9632;</span> 人気の伏線考察ランキング
           </h3>
@@ -106,11 +106,11 @@ export default function Sidebar() {
                 <span
                   className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-black shrink-0 ${
                     i === 0
-                      ? 'rank-1 bg-[#f59e0b] text-[#0a0a12] shadow-sm shadow-[#f59e0b]/30'
+                      ? 'rank-1 bg-[#f59e0b] text-[#0a0a12]'
                       : i === 1
-                        ? 'rank-2 bg-[#b0b0c0] text-[#0a0a12] shadow-sm'
+                        ? 'rank-2 bg-[#b0b0c0] text-[#0a0a12]'
                         : i === 2
-                          ? 'rank-3 bg-[#cd7f32] text-[#0a0a12] shadow-sm'
+                          ? 'rank-3 bg-[#cd7f32] text-[#0a0a12]'
                           : 'rank-other bg-[#1c1c28] text-[#b0b0c0]/60 border border-[#282838]'
                   }`}
                 >
@@ -126,7 +126,7 @@ export default function Sidebar() {
       )}
 
       {/* Category Links */}
-      <div className="bg-[#14141e] rounded-xl border border-[#282838] p-4">
+      <div className="bg-[#14141e] rounded-lg border border-[#282838] p-4">
         <h3 className="font-bold text-sm text-[#eaeaf0] mb-3 flex items-center gap-2">
           <span className="text-[#dc2626]">&#9632;</span> 伏線カテゴリ
         </h3>
@@ -151,7 +151,7 @@ export default function Sidebar() {
       </div>
 
       {/* Popular Tags */}
-      <div className="bg-[#14141e] rounded-xl border border-[#282838] p-4">
+      <div className="bg-[#14141e] rounded-lg border border-[#282838] p-4">
         <h3 className="font-bold text-sm text-[#eaeaf0] mb-3 flex items-center gap-2">
           <span className="text-[#f59e0b]">&#9632;</span> 人気タグ
         </h3>
@@ -175,7 +175,7 @@ export default function Sidebar() {
       </div>
 
       {/* All manga list */}
-      <div className="bg-[#14141e] rounded-xl border border-[#282838] p-4">
+      <div className="bg-[#14141e] rounded-lg border border-[#282838] p-4">
         <h3 className="font-bold text-sm text-[#eaeaf0] mb-3 flex items-center gap-2">
           <span className="text-[#f59e0b]">&#9632;</span> 作品一覧
         </h3>

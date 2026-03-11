@@ -14,14 +14,8 @@ export default function ArticleCard({ article, showManga = true }: ArticleCardPr
   const catColor = CATEGORY_COLORS[article.category];
 
   return (
-    <div className="manga-panel group relative bg-[#14141e] rounded-xl border border-[#282838] overflow-hidden hover:border-[#dc2626]/40 transition-all hover:shadow-lg hover:shadow-[#dc2626]/5">
-      {/* Manga color bar on left */}
-      <div
-        className="absolute left-0 top-0 bottom-0 w-1"
-        style={{ backgroundColor: manga?.coverColor || '#dc2626' }}
-      />
-
-      <div className="pl-4 pr-4 py-4">
+    <div className="manga-panel group relative bg-[#14141e] rounded-xl border border-[#282838] overflow-hidden hover:border-[#dc2626]/40 transition-all">
+      <div className="px-4 py-4">
         {/* Category badge + Manga link */}
         <div className="flex items-center gap-2 mb-2">
           <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${catColor}`}>

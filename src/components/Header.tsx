@@ -23,7 +23,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0a0a12]/95 backdrop-blur border-b border-[#282838]">
+    <header className="sticky top-0 z-50 bg-[#0a0a12] border-b border-[#282838]">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
@@ -54,7 +54,7 @@ export default function Header() {
               </svg>
             </button>
             {mangaDropdown && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-[#14141e] shadow-xl border border-[#282838] rounded-xl py-2 max-h-80 overflow-y-auto">
+              <div className="absolute top-full left-0 mt-2 w-64 bg-[#14141e] shadow-lg border border-[#282838] rounded-lg py-2 max-h-80 overflow-y-auto">
                 {mangaList.map(m => (
                   <Link
                     key={m.slug}
@@ -85,7 +85,7 @@ export default function Header() {
               </svg>
             </button>
             {categoryDropdown && (
-              <div className="absolute top-full left-0 mt-2 w-56 bg-[#14141e] shadow-xl border border-[#282838] rounded-xl py-2">
+              <div className="absolute top-full left-0 mt-2 w-56 bg-[#14141e] shadow-lg border border-[#282838] rounded-lg py-2">
                 {categories.map(([key, label]) => (
                   <Link
                     key={key}
