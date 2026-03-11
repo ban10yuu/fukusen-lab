@@ -126,6 +126,18 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* 関連サイト */}
+        <div className="border-t border-[#282838] mt-8 pt-6">
+          <h3 className="font-bold text-sm text-[#eaeaf0] mb-3">関連サイト</h3>
+          <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+            <a href="https://manga-matome-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors">マンガ考察ラボ</a>
+            <a href="https://anime-review-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors">Anime Review Lab</a>
+            <a href="https://ai-tools-site-dusky.vercel.app" target="_blank" rel="noopener" className="text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors">AIツールラボ</a>
+            <a href="https://vod-navi-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors">動画配信ナビ</a>
+            <a href="https://joseikin-navi-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors">助成金ナビ</a>
+          </div>
+        </div>
+
         <div className="border-t border-[#282838] mt-8 pt-6 text-center">
           <div className="flex justify-center gap-4 mb-3">
             <Link href="/privacy" className="text-xs text-[#b0b0c0]/50 hover:text-[#dc2626] transition-colors">
