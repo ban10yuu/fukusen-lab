@@ -45,7 +45,7 @@ export default function ContactPage() {
 
             <div className="bg-[#1c1c28] border-2 border-[#282838] rounded-lg p-6 text-center my-6">
               <p className="text-sm text-gray-400 mb-2">メールアドレス</p>
-              <p className="text-lg font-bold text-[#f59e0b]">contact@example.com</p>
+              <p className="text-lg font-bold text-[#f59e0b]">ban10yuu@icloud.com</p>
             </div>
 
             <h2>ご連絡いただく際のお願い</h2>
