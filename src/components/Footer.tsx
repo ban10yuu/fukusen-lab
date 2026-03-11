@@ -127,6 +127,15 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-[#282838] mt-8 pt-6 text-center">
+          <div className="flex justify-center gap-4 mb-3">
+            <Link href="/privacy" className="text-xs text-[#b0b0c0]/50 hover:text-[#dc2626] transition-colors">
+              プライバシーポリシー
+            </Link>
+            <span className="text-[#b0b0c0]/30">|</span>
+            <Link href="/contact" className="text-xs text-[#b0b0c0]/50 hover:text-[#dc2626] transition-colors">
+              お問い合わせ
+            </Link>
+          </div>
           <p className="text-xs text-[#b0b0c0]/40 mb-1">
             &copy; 2026 伏線回収ラボ — 漫画の伏線回収・未回収の伏線・伏線考察の専門サイト
           </p>
