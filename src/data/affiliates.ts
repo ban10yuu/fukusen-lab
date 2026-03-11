@@ -1,7 +1,7 @@
 import { AffiliateLink, MangaInfo } from '@/lib/types';
 
 // もしもアフィリエイト a_id (楽天提携済み)
-const MOSHIMO_A_ID = '5417189';
+const MOSHIMO_A_ID = '5419885';
 
 function moshimoRakutenLink(url: string): string {
   return `https://af.moshimo.com/af/c/click?a_id=${MOSHIMO_A_ID}&p_id=54&pc_id=54&pl_id=616&url=${encodeURIComponent(url)}`;
