@@ -54,6 +54,13 @@ export function getAllArticles(): Article[] {
   );
 }
 
+/** サイトマップ用: 日付フィルタなしで全記事を返す */
+export function getAllArticlesUnfiltered(): Article[] {
+  return [...allArticles].sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  );
+}
+
 export function getArticleBySlug(slug: string): Article | undefined {
   return allArticles.find(a => a.slug === slug);
 }

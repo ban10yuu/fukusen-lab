@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getAllArticles } from '@/lib/articles';
+import { getAllArticlesUnfiltered } from '@/lib/articles';
 import { mangaList } from '@/data/manga';
 import { CATEGORY_LABELS, ArticleCategory } from '@/lib/types';
 
@@ -9,7 +9,7 @@ const BASE_URL = 'https://fukusen-lab.vercel.app';
 const TODAY = new Date().toISOString().slice(0, 10);
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const articles = getAllArticles();
+  const articles = getAllArticlesUnfiltered();
   const categories = Object.keys(CATEGORY_LABELS) as ArticleCategory[];
 
   const staticPages: MetadataRoute.Sitemap = [
