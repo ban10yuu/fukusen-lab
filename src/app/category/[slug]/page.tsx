@@ -21,8 +21,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (slug === 'all') {
     return {
-      title: 'すべての伏線考察記事',
-      description: '人気漫画の伏線回収・未回収の伏線・伏線考察記事の一覧。',
+      title: 'すべての伏線考察記事一覧',
+      description: 'ONE PIECE・進撃の巨人・呪術廻戦・鬼滅の刃など人気漫画の伏線回収・未回収の伏線・伏線考察記事の完全一覧。伏線回収ラボの全記事をまとめて閲覧できます。',
+      keywords: ['伏線回収', '伏線考察', '漫画 伏線', '漫画 考察', '伏線 まとめ', '伏線 一覧'],
+      openGraph: {
+        title: 'すべての伏線考察記事一覧｜伏線回収ラボ',
+        description: '人気漫画の伏線回収・未回収の伏線・伏線考察記事の完全一覧。',
+        url: 'https://fukusen-lab.vercel.app/category/all',
+        siteName: '伏線回収ラボ',
+      },
       alternates: {
         canonical: 'https://fukusen-lab.vercel.app/category/all',
       },
@@ -31,8 +38,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const label = CATEGORY_LABELS[slug as ArticleCategory] || slug;
   return {
-    title: `${label}の記事一覧`,
-    description: `${label}に関する漫画の伏線考察記事の一覧です。`,
+    title: `${label}の記事一覧｜漫画の伏線考察`,
+    description: `${label}に関する漫画の伏線考察記事の一覧です。人気漫画の${label}を伏線回収ラボが徹底解説。`,
+    keywords: [label, `${label} まとめ`, '伏線回収', '伏線考察', '漫画 伏線', '漫画 考察'],
+    openGraph: {
+      title: `${label}の記事一覧｜伏線回収ラボ`,
+      description: `${label}に関する漫画の伏線考察記事の一覧です。`,
+      url: `https://fukusen-lab.vercel.app/category/${slug}`,
+      siteName: '伏線回収ラボ',
+    },
     alternates: {
       canonical: `https://fukusen-lab.vercel.app/category/${slug}`,
     },

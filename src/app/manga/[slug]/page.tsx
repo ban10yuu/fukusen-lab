@@ -7,6 +7,7 @@ import AffiliateWidget from '@/components/AffiliateWidget';
 import ArticleCard from '@/components/ArticleCard';
 import GoogleAd from '@/components/GoogleAd';
 import Sidebar from '@/components/Sidebar';
+import { BreadcrumbJsonLd, MangaPageJsonLd } from '@/components/JsonLd';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -22,9 +23,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!manga) return {};
 
   const canonicalUrl = `https://fukusen-lab.vercel.app/manga/${slug}`;
+  const enhancedDescription = `${manga.title}（${manga.author}）の伏線回収・未回収の伏線・伏線考察記事を一覧で掲載。${manga.description}`.slice(0, 160);
   return {
     title: `${manga.title}の伏線回収・未回収の伏線まとめ`,
-    description: `${manga.title}（${manga.author}）の伏線回収・未回収の伏線・伏線考察記事一覧。${manga.description}`,
+    description: enhancedDescription,
     keywords: [
       manga.title,
       manga.titleEn,
@@ -32,8 +34,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `${manga.title} 伏線回収`,
       `${manga.title} 未回収の伏線`,
       `${manga.title} 考察`,
+      `${manga.title} ネタバレ`,
+      `${manga.title} 伏線 まとめ`,
+      `${manga.title} 伏線 解説`,
+      `${manga.title} 深読み`,
       '伏線',
       '伏線回収',
+      '漫画 伏線',
+      '漫画 考察',
       ...manga.genre,
     ],
     openGraph: {
@@ -41,6 +49,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: `${manga.title}の伏線回収・未回収の伏線・伏線考察をお届け。`,
       url: canonicalUrl,
       siteName: '伏線回収ラボ',
+      locale: 'ja_JP',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${manga.title}の伏線回収・未回収の伏線まとめ｜伏線回収ラボ`,
+      description: enhancedDescription,
     },
     alternates: {
       canonical: canonicalUrl,
@@ -150,6 +164,15 @@ export default async function MangaPage({ params }: PageProps) {
           <Sidebar />
         </div>
       </div>
+
+      {/* JSON-LD Structured Data */}
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'ホーム', url: 'https://fukusen-lab.vercel.app' },
+          { name: manga.title, url: `https://fukusen-lab.vercel.app/manga/${manga.slug}` },
+        ]}
+      />
+      <MangaPageJsonLd manga={manga} articleCount={articles.length} />
     </div>
   );
 }

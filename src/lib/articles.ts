@@ -120,3 +120,56 @@ export function searchArticles(query: string): Article[] {
       a.tags.some(t => t.toLowerCase().includes(q))
   );
 }
+
+/** 全タグとその記事数を取得 */
+export function getAllTags(): { tag: string; count: number }[] {
+  const tagMap = new Map<string, number>();
+  for (const article of publishedArticles) {
+    for (const tag of article.tags) {
+      tagMap.set(tag, (tagMap.get(tag) || 0) + 1);
+    }
+  }
+  return Array.from(tagMap.entries())
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+/** タグ名の一覧（スラッグ用） */
+export function getAllTagSlugs(): string[] {
+  const tags = new Set<string>();
+  for (const article of allArticles) {
+    for (const tag of article.tags) {
+      tags.add(tag);
+    }
+  }
+  return Array.from(tags);
+}
+
+/** 特定タグの記事を取得 */
+export function getArticlesByTag(tag: string): Article[] {
+  return publishedArticles
+    .filter(a => a.tags.includes(tag))
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+}
+
+/** タグ名をURLスラッグに変換（スペース→ハイフン、小文字化） */
+export function tagToSlug(tag: string): string {
+  return tag.toLowerCase().replace(/\s+/g, '-');
+}
+
+/** URLスラッグから元のタグ名を逆引き */
+export function slugToTag(slug: string): string | undefined {
+  const decoded = decodeURIComponent(slug);
+  const tags = new Set<string>();
+  for (const article of allArticles) {
+    for (const tag of article.tags) {
+      tags.add(tag);
+    }
+  }
+  const allTags = Array.from(tags);
+  // Exact match first
+  const exact = allTags.find(t => t === decoded);
+  if (exact) return exact;
+  // Slug-based match (e.g., "one-piece" → "ONE PIECE")
+  return allTags.find(t => tagToSlug(t) === decoded);
+}

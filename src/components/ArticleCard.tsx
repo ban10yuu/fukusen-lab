@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Article, CATEGORY_LABELS, CATEGORY_COLORS } from '@/lib/types';
 import { getMangaBySlug } from '@/data/manga';
+import { tagToSlug } from '@/lib/articles';
 
 interface ArticleCardProps {
   article: Article;
@@ -56,9 +57,14 @@ export default function ArticleCard({ article, showManga = true }: ArticleCardPr
         <div className="flex items-center justify-between">
           <div className="flex gap-1 flex-wrap">
             {article.tags.slice(0, 3).map(tag => (
-              <span key={tag} className="text-[9px] px-1.5 py-0.5 bg-[#1c1c28] text-[#b0b0c0]/60 rounded border border-[#282838]">
-                {tag}
-              </span>
+              <Link
+                key={tag}
+                href={`/tag/${tagToSlug(tag)}`}
+                className="text-[9px] px-1.5 py-0.5 bg-[#1c1c28] text-[#b0b0c0]/60 rounded border border-[#282838] hover:border-[#dc2626]/40 hover:text-[#dc2626] transition-colors"
+
+              >
+                #{tag}
+              </Link>
             ))}
           </div>
           <Link

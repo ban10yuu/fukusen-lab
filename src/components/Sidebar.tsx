@@ -1,14 +1,18 @@
 import Link from 'next/link';
-import { getPopularArticles } from '@/lib/articles';
+import { getPopularArticles, getAllTags, tagToSlug } from '@/lib/articles';
 import { mangaList } from '@/data/manga';
 import { generalAffiliates, MOSHIMO_IMPRESSION_URL } from '@/data/affiliates';
+import { CATEGORY_LABELS } from '@/lib/types';
+import type { ArticleCategory } from '@/lib/types';
 import AdBanner from './AdBanner';
 import GoogleAd from '@/components/GoogleAd';
 
 export default function Sidebar() {
-  const popular = getPopularArticles(5);
+  const popular = getPopularArticles(10);
   const featuredAffiliates = generalAffiliates.slice(0, 4);
   const moreAffiliates = generalAffiliates.slice(4);
+  const categories = Object.entries(CATEGORY_LABELS) as [ArticleCategory, string][];
+  const popularTags = getAllTags().slice(0, 15);
 
   return (
     <aside className="space-y-6">
@@ -86,11 +90,11 @@ export default function Sidebar() {
       {/* GoogleAd */}
       <GoogleAd format="rectangle" />
 
-      {/* Popular articles ranking */}
+      {/* Popular articles ranking (10 items) */}
       {popular.length > 0 && (
         <div className="bg-[#14141e] rounded-xl border border-[#282838] p-4">
           <h3 className="font-bold text-sm text-[#eaeaf0] mb-3 flex items-center gap-2">
-            <span className="text-[#dc2626]">&#9632;</span> 人気記事ランキング
+            <span className="text-[#dc2626]">&#9632;</span> 人気の伏線考察ランキング
           </h3>
           <div className="space-y-2">
             {popular.map((article, i) => (
@@ -120,6 +124,55 @@ export default function Sidebar() {
           </div>
         </div>
       )}
+
+      {/* Category Links */}
+      <div className="bg-[#14141e] rounded-xl border border-[#282838] p-4">
+        <h3 className="font-bold text-sm text-[#eaeaf0] mb-3 flex items-center gap-2">
+          <span className="text-[#dc2626]">&#9632;</span> 伏線カテゴリ
+        </h3>
+        <div className="space-y-1">
+          {categories.map(([key, label]) => (
+            <Link
+              key={key}
+              href={`/category/${key}/`}
+              className="flex items-center gap-2 text-xs text-[#b0b0c0] hover:text-[#dc2626] transition-colors py-1.5 group"
+            >
+              <span className="text-[10px] text-gray-600 group-hover:text-[#dc2626]">&rsaquo;</span>
+              {label}
+            </Link>
+          ))}
+          <Link
+            href="/category/all/"
+            className="flex items-center gap-2 text-xs text-[#dc2626] hover:text-[#f59e0b] transition-colors py-1.5 font-bold"
+          >
+            すべての記事を見る &rarr;
+          </Link>
+        </div>
+      </div>
+
+      {/* Popular Tags */}
+      <div className="bg-[#14141e] rounded-xl border border-[#282838] p-4">
+        <h3 className="font-bold text-sm text-[#eaeaf0] mb-3 flex items-center gap-2">
+          <span className="text-[#f59e0b]">&#9632;</span> 人気タグ
+        </h3>
+        <div className="flex flex-wrap gap-1.5">
+          {popularTags.map(({ tag }) => (
+            <Link
+              key={tag}
+              href={`/tag/${tagToSlug(tag)}`}
+              className="text-[10px] text-[#b0b0c0]/60 bg-[#1c1c28] border border-[#282838] px-2 py-0.5 rounded hover:border-[#dc2626]/40 hover:text-[#dc2626] transition-colors"
+            >
+              #{tag}
+            </Link>
+          ))}
+        </div>
+        <Link
+          href="/tags"
+          className="inline-block text-xs text-[#dc2626] hover:text-[#f59e0b] font-bold mt-2 transition-colors"
+        >
+          タグ一覧 &rarr;
+        </Link>
+      </div>
 
       {/* All manga list */}
       <div className="bg-[#14141e] rounded-xl border border-[#282838] p-4">

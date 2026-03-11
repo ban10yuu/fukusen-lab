@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getAllSlugs, getArticleBySlug, getRelatedArticles } from '@/lib/articles';
+import { getAllSlugs, getArticleBySlug, getRelatedArticles, getArticlesByCategory, tagToSlug } from '@/lib/articles';
 import { getMangaBySlug } from '@/data/manga';
-import { CATEGORY_LABELS, CATEGORY_COLORS } from '@/lib/types';
+import { CATEGORY_LABELS, CATEGORY_COLORS, ArticleCategory } from '@/lib/types';
 import AffiliateWidget from '@/components/AffiliateWidget';
 import AdBanner from '@/components/AdBanner';
 import GoogleAd from '@/components/GoogleAd';
@@ -11,6 +11,7 @@ import MangaProductCard from '@/components/MangaProductCard';
 import CommentSection from '@/components/CommentSection';
 import ArticleCard from '@/components/ArticleCard';
 import Sidebar from '@/components/Sidebar';
+import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd, buildFaqFromSections } from '@/components/JsonLd';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -27,23 +28,42 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const manga = getMangaBySlug(article.mangaSlug);
 
   const canonicalUrl = `https://fukusen-lab.vercel.app/article/${slug}`;
+  const categoryLabel = CATEGORY_LABELS[article.category];
+  const mangaTitle = manga?.title ?? '';
+  const enhancedDescription = `${mangaTitle ? `${mangaTitle}の` : ''}${categoryLabel}を徹底解説。${article.excerpt}`;
+  const enhancedKeywords = [
+    ...article.tags,
+    mangaTitle,
+    `${mangaTitle} 伏線`,
+    `${mangaTitle} 伏線回収`,
+    `${mangaTitle} 考察`,
+    `${mangaTitle} ネタバレ`,
+    '伏線',
+    '伏線回収',
+    '考察',
+    categoryLabel,
+    '漫画 伏線',
+    '漫画 考察',
+  ].filter(Boolean);
+
   return {
     title: article.title,
-    description: article.excerpt,
-    keywords: [...article.tags, manga?.title ?? '', '伏線', '伏線回収', '考察'].filter(Boolean),
+    description: enhancedDescription.slice(0, 160),
+    keywords: [...new Set(enhancedKeywords)],
     openGraph: {
       title: article.title,
-      description: article.excerpt,
+      description: enhancedDescription.slice(0, 160),
       type: 'article',
       publishedTime: article.publishedAt,
       tags: article.tags,
       url: canonicalUrl,
       siteName: '伏線回収ラボ',
+      locale: 'ja_JP',
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title: article.title,
-      description: article.excerpt,
+      description: enhancedDescription.slice(0, 160),
     },
     alternates: {
       canonical: canonicalUrl,
@@ -179,12 +199,13 @@ export default async function ArticlePage({ params }: PageProps) {
               <div className="flex items-center gap-2 flex-wrap mt-8 pt-6 border-t border-[#1e1e2e]">
                 <span className="text-xs text-gray-600 font-bold">タグ:</span>
                 {article.tags.map(tag => (
-                  <span
+                  <Link
                     key={tag}
-                    className="text-[10px] text-gray-500 bg-[#1a1a28] border border-[#1e1e2e] px-2.5 py-1 rounded"
+                    href={`/tag/${tagToSlug(tag)}`}
+                    className="text-[10px] text-gray-500 bg-[#1a1a28] border border-[#1e1e2e] px-2.5 py-1 rounded hover:border-[#dc2626]/40 hover:text-[#dc2626] transition-colors"
                   >
                     #{tag}
-                  </span>
+                  </Link>
                 ))}
               </div>
 
@@ -210,6 +231,47 @@ export default async function ArticlePage({ params }: PageProps) {
               </div>
             )}
 
+            {/* Recommended: Same category from other manga */}
+            {(() => {
+              const categoryArticles = getArticlesByCategory(article.category)
+                .filter(a => a.mangaSlug !== article.mangaSlug && a.slug !== article.slug)
+                .slice(0, 4);
+              if (categoryArticles.length === 0) return null;
+              return (
+                <div className="mt-8">
+                  <h2 className="text-lg font-black text-white mb-4 flex items-center gap-2">
+                    <span className="text-[#f59e0b]">▎</span>
+                    「{CATEGORY_LABELS[article.category]}」の他の記事
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {categoryArticles.map(a => (
+                      <ArticleCard key={a.slug} article={a} />
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* Category Navigation */}
+            <div className="mt-8 bg-[#12121c] rounded border border-[#1e1e2e] p-5">
+              <h3 className="text-sm font-black text-white mb-3">カテゴリで探す</h3>
+              <div className="flex gap-2 flex-wrap">
+                {(Object.entries(CATEGORY_LABELS) as [ArticleCategory, string][]).map(([key, label]) => (
+                  <Link
+                    key={key}
+                    href={`/category/${key}`}
+                    className={`text-xs font-bold px-3 py-1.5 rounded border transition-colors ${
+                      key === article.category
+                        ? 'bg-[#dc2626] text-white border-[#dc2626]'
+                        : 'bg-transparent text-gray-500 border-[#1e1e2e] hover:border-[#dc2626] hover:text-[#dc2626]'
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
             {/* GoogleAd: Bottom */}
             <GoogleAd className="mt-8" />
           </article>
@@ -223,72 +285,18 @@ export default async function ArticlePage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* JSON-LD Structured Data: Article + BreadcrumbList */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Article',
-            headline: article.title,
-            description: article.excerpt,
-            datePublished: article.publishedAt,
-            author: {
-              '@type': 'Organization',
-              name: '伏線回収ラボ',
-            },
-            publisher: {
-              '@type': 'Organization',
-              name: '伏線回収ラボ',
-            },
-            mainEntityOfPage: {
-              '@type': 'WebPage',
-              '@id': `https://fukusen-lab.vercel.app/article/${slug}`,
-            },
-            keywords: article.tags.join(', '),
-          }),
-        }}
+      {/* JSON-LD Structured Data */}
+      <ArticleJsonLd article={article} mangaTitle={manga?.title} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'ホーム', url: 'https://fukusen-lab.vercel.app' },
+          ...(manga
+            ? [{ name: manga.title, url: `https://fukusen-lab.vercel.app/manga/${manga.slug}` }]
+            : []),
+          { name: article.title, url: `https://fukusen-lab.vercel.app/article/${slug}` },
+        ]}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-              {
-                '@type': 'ListItem',
-                position: 1,
-                name: 'ホーム',
-                item: 'https://fukusen-lab.vercel.app',
-              },
-              ...(manga
-                ? [
-                    {
-                      '@type': 'ListItem',
-                      position: 2,
-                      name: manga.title,
-                      item: `https://fukusen-lab.vercel.app/manga/${manga.slug}`,
-                    },
-                    {
-                      '@type': 'ListItem',
-                      position: 3,
-                      name: article.title,
-                      item: `https://fukusen-lab.vercel.app/article/${slug}`,
-                    },
-                  ]
-                : [
-                    {
-                      '@type': 'ListItem',
-                      position: 2,
-                      name: article.title,
-                      item: `https://fukusen-lab.vercel.app/article/${slug}`,
-                    },
-                  ]),
-            ],
-          }),
-        }}
-      />
+      <FaqJsonLd items={buildFaqFromSections(article.sections, manga?.title)} />
     </>
   );
 }
