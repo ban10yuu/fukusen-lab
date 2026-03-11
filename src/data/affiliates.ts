@@ -3,6 +3,15 @@ import { AffiliateLink, MangaInfo } from '@/lib/types';
 // もしもアフィリエイト a_id (楽天提携済み)
 const MOSHIMO_A_ID = '5419885';
 
+// A8.net a8mat codes (承認済みプログラム)
+const A8_AMEBA_MANGA = '4AZCG7+ATYY0I+4RKY+60H7L';
+const A8_FUKKAN = '4AZCG7+BE7OKY+37DC+5YRHE';
+const A8_RAKUTEN_KOBO = '4AZCG7+AVR8TU+5EOC+BXB8X';
+
+function a8Link(a8mat: string): string {
+  return `https://px.a8.net/svt/ejp?a8mat=${a8mat}`;
+}
+
 function moshimoRakutenLink(url: string): string {
   return `https://af.moshimo.com/af/c/click?a_id=${MOSHIMO_A_ID}&p_id=54&pc_id=54&pl_id=616&url=${encodeURIComponent(url)}`;
 }
@@ -44,11 +53,11 @@ export function getAffiliateLinks(manga: MangaInfo): AffiliateLink[] {
     badge: '電子書籍',
   });
 
-  // Amebaマンガ (直リンク - ASP提携後に差し替え予定)
+  // Amebaマンガ (A8.net提携済み)
   links.push({
     service: 'ameba',
     label: 'Amebaマンガで読む',
-    url: `https://dokusho-ojikan.jp/search/result?word=${encodeURIComponent(manga.title)}`,
+    url: a8Link(A8_AMEBA_MANGA),
     badge: '100冊40%OFF',
   });
 
@@ -111,7 +120,7 @@ export const generalAffiliates = [
   {
     title: 'Amebaマンガ',
     description: '100冊まで40%OFFクーポン配布中！大量買いするならここ。',
-    url: 'https://dokusho-ojikan.jp/',
+    url: a8Link(A8_AMEBA_MANGA),
     badge: '100冊40%OFF',
     color: '#2dbe60',
   },
