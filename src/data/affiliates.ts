@@ -1,7 +1,7 @@
 import { AffiliateLink, MangaInfo } from '@/lib/types';
 
 // もしもアフィリエイト a_id (楽天提携済み)
-const MOSHIMO_A_ID = '5419885';
+const MOSHIMO_A_ID = '5417189';
 
 // A8.net a8mat codes (承認済みプログラム)
 const A8_AMEBA_MANGA = '4AZCG7+ATYY0I+4RKY+60H7L';
