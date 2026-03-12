@@ -12,6 +12,7 @@ import CommentSection from '@/components/CommentSection';
 import ArticleCard from '@/components/ArticleCard';
 import Sidebar from '@/components/Sidebar';
 import AuthorBox from '@/components/AuthorBox';
+import ShareButtons from '@/components/ShareButtons';
 import { ArticleJsonLd, BreadcrumbJsonLd, FaqJsonLd, buildFaqFromSections } from '@/components/JsonLd';
 
 interface PageProps {
@@ -212,6 +213,9 @@ export default async function ArticlePage({ params }: PageProps) {
 
               {/* GoogleAd: After tags */}
               <GoogleAd className="mt-6" />
+
+              {/* Share Buttons */}
+              <ShareButtons title={article.title} />
 
               {/* Author Box */}
               <AuthorBox />
