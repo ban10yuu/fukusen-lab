@@ -1,8 +1,15 @@
 import type { Metadata } from 'next';
+import { Noto_Sans_JP } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+
+const notoSansJP = Noto_Sans_JP({
+  subsets: ['latin'],
+  weight: ['400', '500', '700', '900'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://fukusen-lab.vercel.app'),
@@ -178,6 +185,18 @@ export default function RootLayout({
               '@type': 'WebSite',
               name: '伏線回収ラボ',
               url: 'https://fukusen-lab.vercel.app',
+              description: 'ONE PIECE、進撃の巨人、呪術廻戦など人気漫画20作品110記事の伏線回収・未回収の伏線・伏線考察を徹底解説する日本最大級の伏線考察専門サイト。',
+              publisher: {
+                '@type': 'Organization',
+                name: '伏線回収ラボ編集部',
+                url: 'https://fukusen-lab.vercel.app',
+              },
+              inLanguage: 'ja',
+              potentialAction: {
+                '@type': 'SearchAction',
+                target: 'https://fukusen-lab.vercel.app/tags?q={search_term_string}',
+                'query-input': 'required name=search_term_string',
+              },
             }),
           }}
         />
@@ -186,14 +205,8 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#0a0a12" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
-          rel="stylesheet"
-        />
       </head>
-      <body className="antialiased min-h-screen flex flex-col">
+      <body className={`${notoSansJP.className} antialiased min-h-screen flex flex-col`}>
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
