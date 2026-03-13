@@ -10,83 +10,63 @@ import { BreadcrumbJsonLd } from '@/components/JsonLd';
 
 export default function Home() {
   const articles = getAllArticles();
-  const featuredArticles = articles.slice(0, 3);
+  const heroArticle = articles[0];
+  const heroManga = heroArticle ? mangaList.find(m => m.slug === heroArticle.mangaSlug) : null;
+  const subArticles = articles.slice(1, 3);
   const recentArticles = articles.slice(3, 15);
+
+  // Category-grouped: resolved vs unresolved for prominence
+  const resolvedArticles = getArticlesByCategory('resolved').slice(0, 4);
+  const unresolvedArticles = getArticlesByCategory('unresolved').slice(0, 4);
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-[#0c0c14] py-16 border-b-2 border-[#1e1e2e]">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="text-center mb-10">
-            <p className="text-[#dc2626] text-xs font-black tracking-[0.3em] uppercase mb-3">
-              Foreshadowing Analysis Lab
-            </p>
-            <h1 className="text-3xl md:text-5xl font-black mb-4 leading-tight text-white">
-              漫画の
-              <span className="text-[#dc2626]">伏線回収</span>
-              ・未回収の伏線を徹底解剖
-            </h1>
-            <p className="text-gray-500 text-sm md:text-base max-w-2xl mx-auto">
-              ONE PIECE・進撃の巨人・呪術廻戦・鬼滅の刃・HUNTER×HUNTERなど人気漫画の伏線回収・未回収の伏線・伏線考察を徹底解説。回収済みの伏線から未回収の謎まで、漫画の伏線を深く読み解く。
-            </p>
-          </div>
+      {/* Hero: Single large featured article */}
+      <section className="bg-[#0a0a12] pt-10 pb-8">
+        <div className="mx-auto max-w-6xl px-4">
+          {heroArticle && (
+            <Link
+              href={`/article/${heroArticle.slug}`}
+              className="group block bg-[#12121c] rounded border border-[#1e1e2e] p-6 md:p-8 hover:border-[#dc2626]/40 transition-colors mb-4"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <span
+                  className="w-2.5 h-2.5 rounded-full"
+                  style={{ backgroundColor: heroManga?.coverColor }}
+                />
+                <span className="text-xs text-gray-500">{heroManga?.title}</span>
+                <span className={`text-[10px] font-bold px-2 py-0.5 rounded ml-2 ${CATEGORY_COLORS[heroArticle.category]}`}>
+                  {CATEGORY_LABELS[heroArticle.category]}
+                </span>
+              </div>
+              <h1 className="text-xl md:text-2xl font-black text-gray-200 mb-3 group-hover:text-[#dc2626] transition-colors leading-snug">
+                {heroArticle.title}
+              </h1>
+              <p className="text-sm text-gray-500 line-clamp-3 max-w-3xl leading-relaxed">
+                {heroArticle.excerpt}
+              </p>
+            </Link>
+          )}
 
-          {/* Featured Articles: large first + 2 small */}
+          {/* Sub-featured: 2 compact */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {/* Large featured */}
-            {featuredArticles[0] && (() => {
-              const manga = mangaList.find(m => m.slug === featuredArticles[0].mangaSlug);
-              return (
-                <Link
-                  href={`/article/${featuredArticles[0].slug}`}
-                  className="group manga-panel !bg-[#12121c] p-6 hover:!border-[#dc2626] md:row-span-2"
-                >
-                  <div className="flex items-center gap-2 mb-3">
-                    <span
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: manga?.coverColor }}
-                    />
-                    <span className="text-xs text-gray-500 font-medium">{manga?.title}</span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#dc2626] text-white ml-auto">
-                      PICK UP
-                    </span>
-                  </div>
-                  <h2 className="text-lg md:text-xl font-black text-gray-200 mb-3 group-hover:text-[#dc2626] transition-colors leading-snug">
-                    {featuredArticles[0].title}
-                  </h2>
-                  <p className="text-sm text-gray-600 line-clamp-3 mb-4">{featuredArticles[0].excerpt}</p>
-                  <div className="flex gap-2 flex-wrap">
-                    {featuredArticles[0].tags.slice(0, 3).map(tag => (
-                      <span key={tag} className="text-[10px] text-gray-600 bg-[#1a1a28] px-2 py-0.5 rounded">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                </Link>
-              );
-            })()}
-
-            {/* 2 small featured */}
-            {featuredArticles.slice(1, 3).map(article => {
+            {subArticles.map(article => {
               const manga = mangaList.find(m => m.slug === article.mangaSlug);
               return (
                 <Link
                   key={article.slug}
                   href={`/article/${article.slug}`}
-                  className="group manga-panel !bg-[#12121c] p-5 hover:!border-[#dc2626]"
+                  className="group bg-[#12121c] rounded border border-[#1e1e2e] p-4 hover:border-[#dc2626]/40 transition-colors"
                 >
-                  <div className="flex items-center gap-2 mb-3">
-                    <span
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: manga?.coverColor }}
-                    />
-                    <span className="text-xs text-gray-500 font-medium">{manga?.title}</span>
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-[10px] text-gray-600">{manga?.title}</span>
+                    <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${CATEGORY_COLORS[article.category]}`}>
+                      {CATEGORY_LABELS[article.category]}
+                    </span>
                   </div>
-                  <h2 className="text-sm font-bold text-gray-200 mb-2 group-hover:text-[#dc2626] transition-colors leading-snug line-clamp-2">
+                  <h2 className="text-sm font-bold text-gray-300 group-hover:text-[#dc2626] transition-colors leading-snug line-clamp-2">
                     {article.title}
                   </h2>
-                  <p className="text-xs text-gray-600 line-clamp-2">{article.excerpt}</p>
                 </Link>
               );
             })}
@@ -94,23 +74,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* GoogleAd: After hero */}
-      <div className="bg-[#0a0a12] py-4">
-        <div className="mx-auto max-w-7xl px-4">
-          <GoogleAd className="my-2" />
+      <div className="bg-[#0a0a12] py-3">
+        <div className="mx-auto max-w-6xl px-4">
+          <GoogleAd className="my-1" />
         </div>
       </div>
 
-      {/* Manga Tags Bar — 全20作品の伏線考察 */}
+      {/* Manga tags — horizontal scroll */}
       <section className="bg-[#0a0a12] border-b border-[#1e1e2e] py-3 overflow-x-auto">
-        <div className="mx-auto max-w-7xl px-4">
-          <h2 className="sr-only">人気漫画の伏線考察一覧</h2>
+        <div className="mx-auto max-w-6xl px-4">
           <div className="flex gap-2 flex-nowrap">
             {mangaList.map(manga => (
               <Link
                 key={manga.slug}
                 href={`/manga/${manga.slug}`}
-                className="flex-shrink-0 text-xs font-bold px-3 py-1.5 rounded border border-[#1e1e2e] text-gray-500 hover:border-[#dc2626] hover:text-[#dc2626] hover:bg-[#dc2626]/5 transition-all"
+                className="flex-shrink-0 text-xs px-3 py-1 rounded border border-[#1e1e2e] text-gray-500 hover:border-[#dc2626] hover:text-[#dc2626] transition-colors"
               >
                 {manga.title}
               </Link>
@@ -119,74 +97,94 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 人気記事ランキング — SEO内部リンク強化 */}
-      <section className="bg-[#0a0a12] border-b border-[#1e1e2e] py-8">
-        <div className="mx-auto max-w-7xl px-4">
-          <h2 className="text-sm font-black text-white mb-4 flex items-center gap-2">
-            <span className="text-[#f59e0b]">▎</span>
-            人気の伏線考察ランキング
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {(() => {
-              const seen = new Set(featuredArticles.map(a => a.slug));
-              const seenManga = new Set<string>();
-              const popularArticles: typeof articles = [];
-              for (const a of articles) {
-                if (popularArticles.length >= 8) break;
-                if (seen.has(a.slug)) continue;
-                if (seenManga.has(a.mangaSlug) && popularArticles.length < 6) continue;
-                popularArticles.push(a);
-                seen.add(a.slug);
-                seenManga.add(a.mangaSlug);
-              }
-              return popularArticles.map((article, idx) => {
-                const manga = mangaList.find(m => m.slug === article.mangaSlug);
-                return (
-                  <Link
-                    key={article.slug}
-                    href={`/article/${article.slug}`}
-                    className="group flex items-start gap-3 bg-[#12121c] rounded border border-[#1e1e2e] p-3 hover:border-[#dc2626]/40 transition-all"
-                  >
-                    <span className="text-lg font-black text-[#dc2626] opacity-60 flex-shrink-0 w-6 text-right">
-                      {idx + 1}
-                    </span>
-                    <div className="min-w-0">
+      {/* Resolved vs Unresolved — the core of this site */}
+      <section className="bg-[#0a0a12] py-10">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Resolved (amber) */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-sm font-black text-[#f59e0b] flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#f59e0b]" />
+                  回収済みの伏線
+                </h2>
+                <Link href="/category/resolved" className="text-[10px] text-gray-600 hover:text-[#f59e0b] transition-colors">
+                  すべて見る
+                </Link>
+              </div>
+              <div className="space-y-2">
+                {resolvedArticles.map(article => {
+                  const manga = mangaList.find(m => m.slug === article.mangaSlug);
+                  return (
+                    <Link
+                      key={article.slug}
+                      href={`/article/${article.slug}`}
+                      className="group block bg-[#12121c] rounded border border-[#1e1e2e] p-3 hover:border-[#f59e0b]/30 transition-colors"
+                    >
+                      <span className="text-[10px] text-gray-600">{manga?.title}</span>
+                      <h3 className="text-xs font-bold text-gray-300 group-hover:text-[#f59e0b] transition-colors line-clamp-2 leading-snug mt-0.5">
+                        {article.title}
+                      </h3>
+                    </Link>
+                  );
+                })}
+                {resolvedArticles.length === 0 && (
+                  <p className="text-xs text-gray-600">記事が見つかりませんでした。</p>
+                )}
+              </div>
+            </div>
+
+            {/* Unresolved (crimson) */}
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-sm font-black text-[#dc2626] flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#dc2626]" />
+                  未回収の伏線
+                </h2>
+                <Link href="/category/unresolved" className="text-[10px] text-gray-600 hover:text-[#dc2626] transition-colors">
+                  すべて見る
+                </Link>
+              </div>
+              <div className="space-y-2">
+                {unresolvedArticles.map(article => {
+                  const manga = mangaList.find(m => m.slug === article.mangaSlug);
+                  return (
+                    <Link
+                      key={article.slug}
+                      href={`/article/${article.slug}`}
+                      className="group block bg-[#12121c] rounded border border-[#1e1e2e] p-3 hover:border-[#dc2626]/30 transition-colors"
+                    >
                       <span className="text-[10px] text-gray-600">{manga?.title}</span>
                       <h3 className="text-xs font-bold text-gray-300 group-hover:text-[#dc2626] transition-colors line-clamp-2 leading-snug mt-0.5">
                         {article.title}
                       </h3>
-                    </div>
-                  </Link>
-                );
-              });
-            })()}
+                    </Link>
+                  );
+                })}
+                {unresolvedArticles.length === 0 && (
+                  <p className="text-xs text-gray-600">記事が見つかりませんでした。</p>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Main Content */}
-      <section className="mx-auto max-w-7xl px-4 py-10 relative z-10">
+      {/* Main Content: articles + sidebar */}
+      <section className="mx-auto max-w-6xl px-4 py-10 relative z-10">
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Articles Grid */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-lg font-black text-white flex items-center gap-2">
+              <h2 className="text-base font-black text-white flex items-center gap-2">
                 <span className="text-[#dc2626]">▎</span>
                 最新の伏線考察
               </h2>
-              <div className="flex gap-3">
-                {(Object.entries(CATEGORY_LABELS) as [ArticleCategory, string][]).slice(0, 3).map(
-                  ([key, label]) => (
-                    <Link
-                      key={key}
-                      href={`/category/${key}`}
-                      className="text-xs text-gray-600 hover:text-[#dc2626] transition-colors font-medium"
-                    >
-                      {label}
-                    </Link>
-                  )
-                )}
-              </div>
+              <Link
+                href="/category/all"
+                className="text-xs text-gray-600 hover:text-[#dc2626] transition-colors"
+              >
+                すべて見る
+              </Link>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -195,90 +193,76 @@ export default function Home() {
               ))}
             </div>
 
-            {/* GoogleAd: After article grid */}
             <GoogleAd className="mt-6" />
 
-            {/* "すべての記事を見る" link */}
+            {/* All categories — compact */}
+            <div className="mt-12">
+              <h2 className="text-base font-black text-white mb-5 flex items-center gap-2">
+                <span className="text-[#dc2626]">▎</span>
+                カテゴリ別に探す
+              </h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+                {(Object.entries(CATEGORY_LABELS) as [ArticleCategory, string][]).map(([key, label]) => {
+                  const catArticles = getArticlesByCategory(key);
+                  if (catArticles.length === 0) return null;
+                  const isResolved = key === 'resolved';
+                  const isUnresolved = key === 'unresolved';
+                  const accent = isResolved ? '#f59e0b' : isUnresolved ? '#dc2626' : '#b0b0c0';
+                  return (
+                    <Link
+                      key={key}
+                      href={`/category/${key}`}
+                      className="group bg-[#12121c] rounded border border-[#1e1e2e] p-3 text-center hover:border-current/30 transition-colors"
+                    >
+                      <h3 className="text-xs font-bold text-gray-300 group-hover:text-white transition-colors">
+                        {label}
+                      </h3>
+                      <span className="text-[10px] mt-1 block" style={{ color: accent }}>
+                        {catArticles.length}件
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            <GoogleAd className="mt-6" />
+
             {articles.length > 15 && (
               <div className="text-center mt-8">
                 <Link
                   href="/category/all"
-                  className="inline-block bg-[#dc2626] text-white px-8 py-3 rounded text-sm font-black hover:bg-[#b91c1c] transition-colors"
+                  className="inline-block bg-[#dc2626] text-white px-8 py-3 rounded text-sm font-bold hover:bg-[#b91c1c] transition-colors"
                 >
-                  すべての記事を見る &rarr;（{articles.length}件）
+                  すべての記事を見る（{articles.length}件）
                 </Link>
               </div>
             )}
           </div>
 
-          {/* Sidebar */}
-          <div className="lg:w-80 flex-shrink-0">
+          <div className="lg:w-72 flex-shrink-0">
             <Sidebar />
           </div>
         </div>
       </section>
 
-      {/* Category Sections — 伏線カテゴリ別の記事紹介 */}
-      <section className="mx-auto max-w-7xl px-4 py-10">
-        <h2 className="text-xl font-black text-white mb-8 text-center">
-          <span className="text-[#dc2626]">伏線</span>カテゴリ別に探す
+      {/* All manga — compact grid at bottom */}
+      <section className="mx-auto max-w-6xl px-4 pb-10">
+        <h2 className="text-sm font-black text-white mb-4 text-center">
+          全{mangaList.length}作品の伏線考察
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {(Object.entries(CATEGORY_LABELS) as [ArticleCategory, string][]).map(([key, label]) => {
-            const catArticles = getArticlesByCategory(key).slice(0, 2);
-            return (
-              <div key={key} className="bg-[#12121c] rounded border border-[#1e1e2e] p-5">
-                <Link href={`/category/${key}`}>
-                  <h3 className="text-sm font-black text-white mb-3 flex items-center gap-2 hover:text-[#dc2626] transition-colors">
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${CATEGORY_COLORS[key]}`}>
-                      {label}
-                    </span>
-                  </h3>
-                </Link>
-                <div className="space-y-2">
-                  {catArticles.map(a => (
-                    <Link
-                      key={a.slug}
-                      href={`/article/${a.slug}`}
-                      className="block text-xs text-gray-400 hover:text-[#dc2626] transition-colors line-clamp-1"
-                    >
-                      {a.title}
-                    </Link>
-                  ))}
-                </div>
-                <Link
-                  href={`/category/${key}`}
-                  className="inline-block text-[10px] text-[#dc2626] hover:text-[#f59e0b] font-bold mt-2 transition-colors"
-                >
-                  {label}の記事をもっと見る &rarr;
-                </Link>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* All Manga Grid — 全作品の伏線考察ページ */}
-      <section className="mx-auto max-w-7xl px-4 pb-10">
-        <h2 className="text-xl font-black text-white mb-6 text-center">
-          全<span className="text-[#dc2626]">{mangaList.length}作品</span>の伏線考察
-        </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-2">
           {mangaList.map(manga => (
             <Link
               key={manga.slug}
               href={`/manga/${manga.slug}`}
-              className="group bg-[#12121c] rounded border border-[#1e1e2e] p-3 hover:border-[#dc2626]/40 transition-all text-center"
+              className="group bg-[#12121c] rounded border border-[#1e1e2e] p-2.5 hover:border-[#dc2626]/30 transition-colors text-center"
             >
-              <span
-                className="inline-block w-3 h-3 rounded-full mb-2"
-                style={{ backgroundColor: manga.coverColor }}
-              />
-              <h3 className="text-xs font-bold text-gray-300 group-hover:text-[#dc2626] transition-colors mb-1">
+              <h3 className="text-[11px] font-bold text-gray-400 group-hover:text-[#dc2626] transition-colors">
                 {manga.title}
               </h3>
               <span className="text-[9px] text-gray-600">
-                {manga.status === 'ongoing' ? '連載中' : '完結'}・{manga.author}
+                {manga.status === 'ongoing' ? '連載中' : '完結'}
               </span>
             </Link>
           ))}

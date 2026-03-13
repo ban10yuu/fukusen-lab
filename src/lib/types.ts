@@ -47,8 +47,8 @@ export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
 };
 
 export const CATEGORY_COLORS: Record<ArticleCategory, string> = {
-  resolved: 'bg-red-900/40 text-red-300 border border-red-700/50',
-  unresolved: 'bg-amber-900/40 text-amber-300 border border-amber-700/50',
+  resolved: 'bg-amber-900/40 text-amber-300 border border-amber-700/50',
+  unresolved: 'bg-red-900/40 text-red-300 border border-red-700/50',
   theory: 'bg-purple-900/40 text-purple-300 border border-purple-700/50',
   technique: 'bg-emerald-900/40 text-emerald-300 border border-emerald-700/50',
   timeline: 'bg-blue-900/40 text-blue-300 border border-blue-700/50',

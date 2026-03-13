@@ -1,159 +1,82 @@
 import Link from 'next/link';
 import { mangaList } from '@/data/manga';
-import { generalAffiliates } from '@/data/affiliates';
-import { getAllTags, tagToSlug } from '@/lib/articles';
 import { CATEGORY_LABELS } from '@/lib/types';
 import type { ArticleCategory } from '@/lib/types';
 
 export default function Footer() {
   const categories = Object.entries(CATEGORY_LABELS) as [ArticleCategory, string][];
-  const ongoingManga = mangaList.filter(m => m.status === 'ongoing');
-  const completedManga = mangaList.filter(m => m.status === 'completed');
-  const popularTags = getAllTags().slice(0, 20);
 
   return (
-    <footer className="bg-[#08080e] border-t border-[#282838] mt-16">
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Col 1: About */}
+    <footer className="bg-[#08080e] border-t border-[#1e1e2e] mt-16">
+      <div className="max-w-6xl mx-auto px-4 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* About */}
           <div>
-            <div className="mb-3">
-              <span className="font-black text-lg">
+            <div className="mb-2">
+              <span className="font-black text-sm">
                 <span className="text-[#dc2626]">伏線</span>
-                <span className="text-[#eaeaf0]">回収ラボ</span>
+                <span className="text-gray-200">回収ラボ</span>
               </span>
             </div>
-            <p className="text-xs text-[#b0b0c0]/70 leading-relaxed mb-3">
-              漫画作品に散りばめられた伏線を徹底的に分析・考察する専門サイトです。回収済みの伏線から未回収の謎まで、伏線テクニックの解説や時系列タイムラインの整理など、物語の深層を多角的に探ります。
-            </p>
-            <p className="text-xs text-[#b0b0c0]/50 leading-relaxed">
-              ONE PIECE・進撃の巨人・呪術廻戦・鬼滅の刃・HUNTER×HUNTERなど、20作品以上の人気漫画の伏線考察を掲載中。
+            <p className="text-xs text-gray-600 leading-relaxed">
+              漫画作品の伏線を徹底分析する専門サイト。回収済みの伏線から未回収の謎まで、{mangaList.length}作品以上の伏線考察を掲載中。
             </p>
           </div>
 
-          {/* Col 2: 連載中の作品 + 完結作品 */}
+          {/* Categories + Manga */}
           <div>
-            <h3 className="font-bold text-sm text-[#eaeaf0] mb-3">連載中の作品の伏線考察</h3>
-            <div className="flex flex-col gap-1 mb-4">
-              {ongoingManga.map(m => (
-                <Link
-                  key={m.slug}
-                  href={`/manga/${m.slug}/`}
-                  className="flex items-center gap-2 text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors py-0.5"
-                >
-                  <span
-                    className="w-2 h-2 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: m.coverColor }}
-                  />
-                  {m.title}
-                </Link>
-              ))}
-            </div>
-            <h3 className="font-bold text-sm text-[#eaeaf0] mb-3">完結作品の伏線回収</h3>
-            <div className="flex flex-col gap-1">
-              {completedManga.map(m => (
-                <Link
-                  key={m.slug}
-                  href={`/manga/${m.slug}/`}
-                  className="flex items-center gap-2 text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors py-0.5"
-                >
-                  <span
-                    className="w-2 h-2 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: m.coverColor }}
-                  />
-                  {m.title}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Col 3: カテゴリ + 電子書籍サイト */}
-          <div>
-            <h3 className="font-bold text-sm text-[#eaeaf0] mb-3">伏線カテゴリ</h3>
-            <div className="flex flex-col gap-1 mb-4">
+            <h3 className="text-xs font-bold text-gray-400 mb-2">カテゴリ</h3>
+            <div className="flex flex-wrap gap-x-4 gap-y-1 mb-4">
               {categories.map(([key, label]) => (
                 <Link
                   key={key}
                   href={`/category/${key}/`}
-                  className="text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors py-0.5"
+                  className="text-xs text-gray-600 hover:text-[#dc2626] transition-colors"
                 >
                   {label}
                 </Link>
               ))}
-              <Link
-                href="/category/all/"
-                className="text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors py-0.5"
-              >
-                すべての記事
-              </Link>
             </div>
-            <h3 className="font-bold text-sm text-[#eaeaf0] mb-3">電子書籍サイト</h3>
-            <div className="flex flex-col gap-1">
-              {generalAffiliates.map(a => (
-                <a
-                  key={a.title}
-                  href={a.url}
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  className="text-xs text-[#b0b0c0]/70 hover:text-[#f59e0b] transition-colors py-0.5"
-                >
-                  {a.title}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Col 4: 人気タグ */}
-          <div>
-            <h3 className="font-bold text-sm text-[#eaeaf0] mb-3">人気の伏線タグ</h3>
-            <div className="flex flex-wrap gap-1.5">
-              {popularTags.map(({ tag, count }) => (
+            <h3 className="text-xs font-bold text-gray-400 mb-2">作品</h3>
+            <div className="flex flex-wrap gap-x-3 gap-y-1">
+              {mangaList.slice(0, 10).map(m => (
                 <Link
-                  key={tag}
-                  href={`/tag/${tagToSlug(tag)}`}
-                  className="text-[10px] text-[#b0b0c0]/60 bg-[#12121c] border border-[#1e1e2e] px-2 py-0.5 rounded hover:border-[#dc2626]/40 hover:text-[#dc2626] transition-colors"
+                  key={m.slug}
+                  href={`/manga/${m.slug}/`}
+                  className="text-xs text-gray-600 hover:text-[#dc2626] transition-colors"
                 >
-                  #{tag}
+                  {m.title}
                 </Link>
               ))}
+              {mangaList.length > 10 && (
+                <span className="text-xs text-gray-700">他{mangaList.length - 10}作品</span>
+              )}
             </div>
-            <Link
-              href="/tags"
-              className="inline-block text-xs text-[#dc2626] hover:text-[#f59e0b] font-bold mt-3 transition-colors"
-            >
-              すべてのタグを見る &rarr;
-            </Link>
+          </div>
+
+          {/* Links */}
+          <div>
+            <h3 className="text-xs font-bold text-gray-400 mb-2">関連サイト</h3>
+            <div className="flex flex-col gap-1">
+              <a href="https://manga-matome-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-gray-600 hover:text-[#dc2626] transition-colors">マンガ考察ラボ</a>
+              <a href="https://anime-review-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-gray-600 hover:text-[#dc2626] transition-colors">Anime Review Lab</a>
+              <a href="https://vod-navi-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-gray-600 hover:text-[#dc2626] transition-colors">動画配信ナビ</a>
+            </div>
           </div>
         </div>
 
-        {/* 関連サイト */}
-        <div className="border-t border-[#282838] mt-8 pt-6">
-          <h3 className="font-bold text-sm text-[#eaeaf0] mb-3">関連サイト</h3>
-          <div className="flex flex-wrap gap-x-4 gap-y-1.5">
-            <a href="https://manga-matome-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors">マンガ考察ラボ</a>
-            <a href="https://anime-review-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors">Anime Review Lab</a>
-            <a href="https://ai-tools-site-dusky.vercel.app" target="_blank" rel="noopener" className="text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors">AIツールラボ</a>
-            <a href="https://vod-navi-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors">動画配信ナビ</a>
-            <a href="https://joseikin-navi-site.vercel.app" target="_blank" rel="noopener" className="text-xs text-[#b0b0c0]/70 hover:text-[#dc2626] transition-colors">助成金ナビ</a>
-          </div>
-        </div>
-
-        <div className="border-t border-[#282838] mt-8 pt-6 text-center">
+        <div className="border-t border-[#1e1e2e] mt-8 pt-6 text-center text-xs text-gray-700">
           <div className="flex justify-center gap-4 mb-3">
-            <Link href="/privacy" className="text-xs text-[#b0b0c0]/50 hover:text-[#dc2626] transition-colors">
+            <Link href="/privacy" className="text-gray-600 hover:text-[#dc2626] transition-colors">
               プライバシーポリシー
             </Link>
-            <span className="text-[#b0b0c0]/30">|</span>
-            <Link href="/contact" className="text-xs text-[#b0b0c0]/50 hover:text-[#dc2626] transition-colors">
+            <span className="text-gray-800">|</span>
+            <Link href="/contact" className="text-gray-600 hover:text-[#dc2626] transition-colors">
               お問い合わせ
             </Link>
           </div>
-          <p className="text-xs text-[#b0b0c0]/40 mb-1">
-            &copy; 2026 伏線回収ラボ — 漫画の伏線回収・未回収の伏線・伏線考察の専門サイト
-          </p>
-          <p className="text-[10px] text-[#b0b0c0]/30">
-            当サイトはアフィリエイトプログラムに参加しています。
-          </p>
+          <p className="text-gray-700">※ 当サイトはアフィリエイトプログラムに参加しています。</p>
+          <p className="mt-2 text-gray-600">&copy; 2026 伏線回収ラボ</p>
         </div>
       </div>
     </footer>
