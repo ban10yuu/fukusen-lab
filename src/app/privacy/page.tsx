@@ -111,7 +111,7 @@ export default function PrivacyPage() {
               <Link href="/contact" className="text-[#f59e0b] hover:underline">お問い合わせページ</Link>よりお願いいたします。
             </p>
 
-            <div className="mt-8 pt-6 border-t border-[#282838] text-sm text-gray-500">
+            <div className="mt-8 pt-6 border-t border-[#282838] text-sm text-gray-400">
               <p className="mb-0">制定日：2026年3月11日</p>
             </div>
           </div>

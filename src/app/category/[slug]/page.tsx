@@ -87,7 +87,7 @@ export default async function CategoryPage({ params }: PageProps) {
           className={`text-xs font-bold px-3 py-1.5 rounded border transition-colors ${
             slug === 'all'
               ? 'bg-[#dc2626] text-white border-[#dc2626]'
-              : 'bg-transparent text-gray-500 border-[#1e1e2e] hover:border-[#dc2626] hover:text-[#dc2626]'
+              : 'bg-transparent text-gray-400 border-[#1e1e2e] hover:border-[#dc2626] hover:text-[#dc2626]'
           }`}
         >
           すべて
@@ -99,7 +99,7 @@ export default async function CategoryPage({ params }: PageProps) {
             className={`text-xs font-bold px-3 py-1.5 rounded border transition-colors ${
               slug === key
                 ? 'bg-[#dc2626] text-white border-[#dc2626]'
-                : 'bg-transparent text-gray-500 border-[#1e1e2e] hover:border-[#dc2626] hover:text-[#dc2626]'
+                : 'bg-transparent text-gray-400 border-[#1e1e2e] hover:border-[#dc2626] hover:text-[#dc2626]'
             }`}
           >
             {label}
@@ -114,7 +114,7 @@ export default async function CategoryPage({ params }: PageProps) {
         <div className="flex-1 min-w-0">
           {articles.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-gray-500 text-lg mb-2">記事が見つかりませんでした</p>
+              <p className="text-gray-400 text-lg mb-2">記事が見つかりませんでした</p>
               <Link href="/" className="text-sm text-[#dc2626] hover:text-[#f59e0b] font-bold">
                 トップページに戻る
               </Link>

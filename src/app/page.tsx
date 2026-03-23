@@ -34,7 +34,7 @@ export default function Home() {
                   className="w-2.5 h-2.5 rounded-full"
                   style={{ backgroundColor: heroManga?.coverColor }}
                 />
-                <span className="text-xs text-gray-500">{heroManga?.title}</span>
+                <span className="text-xs text-gray-400">{heroManga?.title}</span>
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded ml-2 ${CATEGORY_COLORS[heroArticle.category]}`}>
                   {CATEGORY_LABELS[heroArticle.category]}
                 </span>
@@ -42,7 +42,7 @@ export default function Home() {
               <h1 className="text-xl md:text-2xl font-black text-gray-200 mb-3 group-hover:text-[#dc2626] transition-colors leading-snug">
                 {heroArticle.title}
               </h1>
-              <p className="text-sm text-gray-500 line-clamp-3 max-w-3xl leading-relaxed">
+              <p className="text-sm text-gray-400 line-clamp-3 max-w-3xl leading-relaxed">
                 {heroArticle.excerpt}
               </p>
             </Link>
@@ -88,7 +88,7 @@ export default function Home() {
               <Link
                 key={manga.slug}
                 href={`/manga/${manga.slug}`}
-                className="flex-shrink-0 text-xs px-3 py-1 rounded border border-[#1e1e2e] text-gray-500 hover:border-[#dc2626] hover:text-[#dc2626] transition-colors"
+                className="flex-shrink-0 text-xs px-3 py-1 rounded border border-[#1e1e2e] text-gray-400 hover:border-[#dc2626] hover:text-[#dc2626] transition-colors"
               >
                 {manga.title}
               </Link>

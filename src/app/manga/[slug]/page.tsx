@@ -90,7 +90,7 @@ export default async function MangaPage({ params }: PageProps) {
 
           {/* Title & Info */}
           <h1 className="text-2xl md:text-3xl font-black text-white mb-2">{manga.title}</h1>
-          <p className="text-sm text-gray-500 mb-3">
+          <p className="text-sm text-gray-400 mb-3">
             <span className="text-gray-400">作者：{manga.author}</span>
             <span className="mx-2 text-gray-700">|</span>
             <span
@@ -104,7 +104,7 @@ export default async function MangaPage({ params }: PageProps) {
               {manga.status === 'ongoing' ? '連載中' : '完結済み'}
             </span>
           </p>
-          <p className="text-sm text-gray-500 max-w-2xl leading-relaxed mb-4">{manga.description}</p>
+          <p className="text-sm text-gray-400 max-w-2xl leading-relaxed mb-4">{manga.description}</p>
 
           {/* Genre Tags */}
           <div className="flex flex-wrap gap-2">
@@ -139,7 +139,7 @@ export default async function MangaPage({ params }: PageProps) {
 
           {articles.length === 0 ? (
             <div className="text-center py-16 bg-[#12121c] rounded border border-[#1e1e2e]">
-              <p className="text-gray-500 text-lg mb-2">まだ記事がありません</p>
+              <p className="text-gray-400 text-lg mb-2">まだ記事がありません</p>
               <p className="text-gray-600 text-sm mb-4">
                 {manga.title}の伏線考察記事を準備中です。
               </p>

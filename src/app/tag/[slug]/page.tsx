@@ -69,7 +69,7 @@ export default async function TagPage({ params }: PageProps) {
           <div className="flex-1 min-w-0">
             {articles.length === 0 ? (
               <div className="text-center py-16">
-                <p className="text-gray-500 text-lg mb-2">記事が見つかりませんでした</p>
+                <p className="text-gray-400 text-lg mb-2">記事が見つかりませんでした</p>
                 <Link href="/" className="text-sm text-[#dc2626] hover:text-[#f59e0b] font-bold">
                   トップページに戻る
                 </Link>

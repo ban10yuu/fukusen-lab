@@ -57,7 +57,7 @@ export default function TagsPage() {
                 {tags.map(({ tag, count }) => {
                   const ratio = count / maxCount;
                   const size = ratio > 0.7 ? 'text-base' : ratio > 0.4 ? 'text-sm' : 'text-xs';
-                  const brightness = ratio > 0.7 ? 'text-[#dc2626]' : ratio > 0.4 ? 'text-gray-300' : 'text-gray-500';
+                  const brightness = ratio > 0.7 ? 'text-[#dc2626]' : ratio > 0.4 ? 'text-gray-300' : 'text-gray-400';
                   return (
                     <Link
                       key={tag}

@@ -37,7 +37,7 @@ export default function Sidebar() {
                         ? 'bg-[#b0b0c0] text-[#0a0a12]'
                         : i === 2
                           ? 'bg-[#cd7f32] text-[#0a0a12]'
-                          : 'bg-[#1c1c28] text-gray-500 border border-[#282838]'
+                          : 'bg-[#1c1c28] text-gray-400 border border-[#282838]'
                   }`}
                 >
                   {i + 1}
@@ -117,7 +117,7 @@ export default function Sidebar() {
             <Link
               key={key}
               href={`/category/${key}/`}
-              className="block py-1 text-xs text-gray-500 hover:text-[#dc2626] transition-colors"
+              className="block py-1 text-xs text-gray-400 hover:text-[#dc2626] transition-colors"
             >
               {label}
             </Link>
@@ -165,7 +165,7 @@ export default function Sidebar() {
                 className="w-1.5 h-1.5 rounded-full flex-shrink-0"
                 style={{ backgroundColor: m.coverColor }}
               />
-              <span className="text-xs text-gray-500 group-hover:text-[#dc2626] transition-colors">
+              <span className="text-xs text-gray-400 group-hover:text-[#dc2626] transition-colors">
                 {m.title}
               </span>
             </Link>

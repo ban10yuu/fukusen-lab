@@ -1,0 +1,10 @@
+{
+  "name": "伏線回収ラボ",
+  "short_name": "伏線ラボ",
+  "description": "漫画・アニメの伏線回収を徹底分析",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#dc2626",
+  "icons": []
+}

@@ -45,7 +45,7 @@ export default function ShareButtons({ title }: ShareButtonsProps) {
 
   return (
     <div className="flex items-center gap-3 my-6">
-      <span className="text-xs font-bold text-gray-500">共有:</span>
+      <span className="text-xs font-bold text-gray-400">共有:</span>
 
       {/* X (Twitter) */}
       <button

@@ -58,7 +58,7 @@ export default function ArticleCard({ article, showManga = true }: ArticleCardPr
             <Link
               key={tag}
               href={`/tag/${tagToSlug(tag)}`}
-              className="text-[9px] text-gray-600 hover:text-[#dc2626] transition-colors"
+              className="text-[9px] text-gray-600 hover:text-[#dc2626] transition-colors px-2 py-1.5 inline-block"
             >
               #{tag}
             </Link>
