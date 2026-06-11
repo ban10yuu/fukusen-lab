@@ -22,15 +22,15 @@ export default function ContactPage() {
   return (
     <>
       <div className="mx-auto max-w-4xl px-4 py-8 relative z-10">
-        <nav className="text-xs text-gray-600 mb-3 flex items-center gap-1">
-          <Link href="/" className="hover:text-[#dc2626] transition-colors">ホーム</Link>
-          <span className="text-gray-700">/</span>
-          <span className="text-gray-400">お問い合わせ</span>
+        <nav className="text-xs text-mist-dim mb-3 flex items-center gap-1">
+          <Link href="/" className="hover:text-brass-light transition-colors">ホーム</Link>
+          <span className="text-ink-line">/</span>
+          <span className="text-mist">お問い合わせ</span>
         </nav>
 
-        <h1 className="text-2xl font-black text-white mb-8">お問い合わせ</h1>
+        <h1 className="study-heading inline-block text-2xl mb-8">お問い合わせ</h1>
 
-        <div className="bg-[#12121c] rounded border-2 border-[#1e1e2e] p-6 md:p-8">
+        <div className="paper double-rule p-6 md:p-8">
           <div className="article-content">
             <p>
               伏線回収ラボをご覧いただきありがとうございます。
@@ -43,13 +43,13 @@ export default function ContactPage() {
               お問い合わせはメールにてお願いいたします。
             </p>
 
-            <div className="bg-[#1c1c28] border-2 border-[#282838] rounded-lg p-6 text-center my-6">
-              <p className="text-sm text-gray-400 mb-2">メールアドレス</p>
-              <p className="text-lg font-bold text-[#f59e0b]">ban10yuu@icloud.com</p>
+            <div className="panel double-rule-dark p-6 text-center my-6">
+              <p className="brass-label mb-2">メールアドレス</p>
+              <p className="font-serif text-lg font-bold text-brass-light tracking-wide">ban10yuu@icloud.com</p>
             </div>
 
             <h2>ご連絡いただく際のお願い</h2>
-            <ul className="list-disc list-inside space-y-2 mb-6 text-[#c0c0d0]">
+            <ul className="list-disc list-inside space-y-2 mb-6 text-sepia-700">
               <li>件名に「伏線回収ラボ」と記載いただけるとスムーズに対応できます。</li>
               <li>お問い合わせ内容によっては、回答にお時間をいただく場合がございます。</li>
               <li>通常、3営業日以内にご返信いたします。</li>
@@ -57,7 +57,7 @@ export default function ContactPage() {
             </ul>
 
             <h2>お問い合わせ内容の例</h2>
-            <ul className="list-disc list-inside space-y-2 mb-6 text-[#c0c0d0]">
+            <ul className="list-disc list-inside space-y-2 mb-6 text-sepia-700">
               <li>記事内容に関するご質問・ご意見</li>
               <li>掲載情報の誤りに関するご指摘</li>
               <li>取り上げてほしい作品・テーマのリクエスト</li>

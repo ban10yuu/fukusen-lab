@@ -23,22 +23,36 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0a0a12] border-b border-[#282838]">
-      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 group">
+    <header className="sticky top-0 z-50 bg-ink-deep/95 backdrop-blur-sm border-b border-ink-line shadow-[0_1px_0_rgba(201,163,94,0.25)]">
+      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        {/* Logo — brass magnifying glass + serif wordmark */}
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <svg
+            className="w-7 h-7 text-brass group-hover:text-brass-light transition-colors flex-shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            aria-hidden="true"
+          >
+            <circle cx="10.5" cy="10.5" r="6.5" />
+            <circle cx="10.5" cy="10.5" r="3.5" strokeWidth="0.75" opacity="0.6" />
+            <path strokeLinecap="round" strokeWidth="2.2" d="M15.5 15.5L21 21" />
+          </svg>
           <div className="flex flex-col">
-            <span className="font-black text-lg leading-tight">
-              <span className="text-[#dc2626]">伏線</span>
-              <span className="text-[#eaeaf0] group-hover:text-[#f59e0b] transition-colors">回収ラボ</span>
+            <span className="font-serif font-extrabold text-lg leading-tight tracking-wide">
+              <span className="text-brass group-hover:text-brass-light transition-colors">伏線</span>
+              <span className="text-parchment group-hover:text-parchment-light transition-colors">回収ラボ</span>
             </span>
-            <span className="text-[9px] tracking-[0.2em] text-[#b0b0c0]/60 font-semibold">FUKUSEN LAB</span>
+            <span className="text-[9px] tracking-[0.35em] text-mist-dim font-semibold uppercase">
+              Fukusen Lab — 考察書斎
+            </span>
           </div>
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6 text-sm">
-          <Link href="/" className="text-[#b0b0c0] hover:text-[#dc2626] transition-colors">
+          <Link href="/" className="text-mist hover:text-brass-light transition-colors">
             ホーム
           </Link>
 
@@ -46,7 +60,7 @@ export default function Header() {
           <div className="relative">
             <button
               onClick={() => { setMangaDropdown(!mangaDropdown); setCategoryDropdown(false); }}
-              className="text-[#b0b0c0] hover:text-[#dc2626] transition-colors flex items-center gap-1"
+              className="text-mist hover:text-brass-light transition-colors flex items-center gap-1"
             >
               作品一覧
               <svg className={`w-3.5 h-3.5 transition-transform ${mangaDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,16 +68,16 @@ export default function Header() {
               </svg>
             </button>
             {mangaDropdown && (
-              <div className="absolute top-full left-0 mt-2 w-64 bg-[#14141e] shadow-lg border border-[#282838] rounded-lg py-2 max-h-80 overflow-y-auto">
+              <div className="absolute top-full left-0 mt-3 w-64 bg-ink-surface shadow-[0_8px_24px_rgba(0,0,0,0.45)] double-rule py-2 max-h-80 overflow-y-auto">
                 {mangaList.map(m => (
                   <Link
                     key={m.slug}
                     href={`/manga/${m.slug}/`}
-                    className="flex items-center gap-2.5 px-4 py-2 text-sm text-[#b0b0c0] hover:text-[#dc2626] hover:bg-[#1c1c28] transition-colors"
+                    className="flex items-center gap-2.5 px-4 py-2 text-sm text-mist hover:text-brass-light hover:bg-ink-raised transition-colors"
                     onClick={() => setMangaDropdown(false)}
                   >
                     <span
-                      className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                      className="w-2.5 h-2.5 rounded-full flex-shrink-0 ring-1 ring-black/20"
                       style={{ backgroundColor: m.coverColor }}
                     />
                     {m.title}
@@ -77,7 +91,7 @@ export default function Header() {
           <div className="relative">
             <button
               onClick={() => { setCategoryDropdown(!categoryDropdown); setMangaDropdown(false); }}
-              className="text-[#b0b0c0] hover:text-[#dc2626] transition-colors flex items-center gap-1"
+              className="text-mist hover:text-brass-light transition-colors flex items-center gap-1"
             >
               カテゴリ
               <svg className={`w-3.5 h-3.5 transition-transform ${categoryDropdown ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -85,12 +99,12 @@ export default function Header() {
               </svg>
             </button>
             {categoryDropdown && (
-              <div className="absolute top-full left-0 mt-2 w-56 bg-[#14141e] shadow-lg border border-[#282838] rounded-lg py-2">
+              <div className="absolute top-full left-0 mt-3 w-56 bg-ink-surface shadow-[0_8px_24px_rgba(0,0,0,0.45)] double-rule py-2">
                 {categories.map(([key, label]) => (
                   <Link
                     key={key}
                     href={`/category/${key}/`}
-                    className="block px-4 py-2 text-sm text-[#b0b0c0] hover:text-[#dc2626] hover:bg-[#1c1c28] transition-colors"
+                    className="block px-4 py-2 text-sm text-mist hover:text-brass-light hover:bg-ink-raised transition-colors"
                     onClick={() => setCategoryDropdown(false)}
                   >
                     {label}
@@ -100,7 +114,7 @@ export default function Header() {
             )}
           </div>
 
-          <Link href="/category/all" className="text-[#b0b0c0] hover:text-[#dc2626] transition-colors">
+          <Link href="/category/all" className="text-mist hover:text-brass-light transition-colors">
             記事一覧
           </Link>
 
@@ -110,10 +124,10 @@ export default function Header() {
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              placeholder="検索..."
-              className="w-40 bg-[#1c1c28] border border-[#282838] rounded-lg px-3 py-1.5 text-xs text-[#eaeaf0] placeholder-[#b0b0c0]/50 focus:outline-none focus:ring-1 focus:ring-[#dc2626] focus:border-[#dc2626] transition-colors"
+              placeholder="手がかりを検索..."
+              className="w-44 bg-ink-raised border border-ink-line rounded-sm px-3 py-1.5 pr-8 text-xs text-parchment placeholder-mist-dim focus:outline-none focus:ring-1 focus:ring-brass focus:border-brass transition-colors"
             />
-            <button type="submit" aria-label="検索" className="absolute right-2 top-1/2 -translate-y-1/2 text-[#b0b0c0] hover:text-[#dc2626] transition-colors">
+            <button type="submit" aria-label="検索" className="absolute right-2 top-1/2 -translate-y-1/2 text-mist-dim hover:text-brass-light transition-colors">
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
@@ -124,7 +138,8 @@ export default function Header() {
         {/* Mobile menu button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-[#b0b0c0] hover:text-[#dc2626]"
+          aria-label="メニュー"
+          className="md:hidden p-2 -mr-2 text-mist hover:text-brass-light transition-colors"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {menuOpen ? (
@@ -138,22 +153,22 @@ export default function Header() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-[#14141e] border-t border-[#282838] py-4 px-4">
-          <Link href="/" className="block py-2 text-[#b0b0c0] hover:text-[#dc2626]" onClick={() => setMenuOpen(false)}>
+        <div className="md:hidden bg-ink-surface border-t-[3px] border-double border-brass-dark/50 py-4 px-4 max-h-[calc(100vh-4rem)] overflow-y-auto">
+          <Link href="/" className="block py-2.5 text-mist hover:text-brass-light transition-colors" onClick={() => setMenuOpen(false)}>
             ホーム
           </Link>
-          <Link href="/category/all" className="block py-2 text-[#b0b0c0] hover:text-[#dc2626]" onClick={() => setMenuOpen(false)}>
+          <Link href="/category/all" className="block py-2.5 text-mist hover:text-brass-light transition-colors" onClick={() => setMenuOpen(false)}>
             記事一覧
           </Link>
 
           {/* Mobile: カテゴリ */}
-          <div className="mt-3 border-t border-[#282838] pt-3">
-            <p className="text-xs text-[#b0b0c0]/50 mb-2">カテゴリ</p>
+          <div className="mt-3 border-t border-ink-line pt-3">
+            <p className="brass-label mb-2">カテゴリ</p>
             {categories.map(([key, label]) => (
               <Link
                 key={key}
                 href={`/category/${key}/`}
-                className="block py-1.5 text-sm text-[#b0b0c0] hover:text-[#dc2626]"
+                className="block py-2 text-sm text-mist hover:text-brass-light transition-colors"
                 onClick={() => setMenuOpen(false)}
               >
                 {label}
@@ -162,17 +177,17 @@ export default function Header() {
           </div>
 
           {/* Mobile: 作品一覧 */}
-          <div className="mt-3 border-t border-[#282838] pt-3">
-            <p className="text-xs text-[#b0b0c0]/50 mb-2">作品一覧</p>
+          <div className="mt-3 border-t border-ink-line pt-3">
+            <p className="brass-label mb-2">作品一覧</p>
             {mangaList.map(m => (
               <Link
                 key={m.slug}
                 href={`/manga/${m.slug}/`}
-                className="flex items-center gap-2 py-1.5 text-sm text-[#b0b0c0] hover:text-[#dc2626]"
+                className="flex items-center gap-2 py-2 text-sm text-mist hover:text-brass-light transition-colors"
                 onClick={() => setMenuOpen(false)}
               >
                 <span
-                  className="w-2 h-2 rounded-full flex-shrink-0"
+                  className="w-2 h-2 rounded-full flex-shrink-0 ring-1 ring-black/20"
                   style={{ backgroundColor: m.coverColor }}
                 />
                 {m.title}
@@ -186,8 +201,8 @@ export default function Header() {
               type="text"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              placeholder="記事を検索..."
-              className="w-full bg-[#1c1c28] border border-[#282838] rounded-lg px-4 py-2 text-sm text-[#eaeaf0] placeholder-[#b0b0c0]/50 focus:outline-none focus:ring-1 focus:ring-[#dc2626] focus:border-[#dc2626]"
+              placeholder="手がかりを検索..."
+              className="w-full bg-ink-raised border border-ink-line rounded-sm px-4 py-2.5 text-sm text-parchment placeholder-mist-dim focus:outline-none focus:ring-1 focus:ring-brass focus:border-brass transition-colors"
             />
           </form>
         </div>

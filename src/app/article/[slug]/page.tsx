@@ -87,39 +87,39 @@ export default async function ArticlePage({ params }: PageProps) {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Main Content */}
           <article className="flex-1 min-w-0">
-            <div className="bg-[#12121c] rounded border-2 border-[#1e1e2e] p-6 md:p-8">
+            <div className="paper double-rule p-6 md:p-8">
               {/* PR notice */}
-              <p className="text-[10px] text-gray-600 mb-4">※当サイトはアフィリエイト広告を利用しています</p>
+              <p className="text-[10px] text-sepia-500 mb-4">※当サイトはアフィリエイト広告を利用しています</p>
 
               {/* Breadcrumb */}
-              <nav className="text-xs text-gray-600 mb-4 flex items-center gap-1 flex-wrap">
-                <Link href="/" className="hover:text-[#dc2626] transition-colors">ホーム</Link>
-                <span className="text-gray-700">/</span>
+              <nav className="text-xs text-sepia-500 mb-4 flex items-center gap-1 flex-wrap">
+                <Link href="/" className="hover:text-copper transition-colors">ホーム</Link>
+                <span className="text-parchment-line">/</span>
                 {manga && (
                   <>
-                    <Link href={`/manga/${manga.slug}`} className="hover:text-[#dc2626] transition-colors">
+                    <Link href={`/manga/${manga.slug}`} className="hover:text-copper transition-colors">
                       {manga.title}
                     </Link>
-                    <span className="text-gray-700">/</span>
+                    <span className="text-parchment-line">/</span>
                   </>
                 )}
-                <span className="text-gray-400 line-clamp-1">{article.title}</span>
+                <span className="text-sepia-700 line-clamp-1">{article.title}</span>
               </nav>
 
               {/* Article Header: category badge, title, date, manga link */}
               <div className="flex items-center gap-2 mb-4 flex-wrap">
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${CATEGORY_COLORS[article.category]}`}>
+                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-sm ${CATEGORY_COLORS[article.category]}`}>
                   {CATEGORY_LABELS[article.category]}
                 </span>
                 {manga && (
                   <Link
                     href={`/manga/${manga.slug}`}
-                    className="text-xs font-bold px-2.5 py-0.5 rounded bg-[#1a1a28] text-gray-400 hover:text-white hover:bg-[#222232] transition-colors border border-[#1e1e2e]"
+                    className="text-xs font-bold px-2.5 py-0.5 rounded-sm bg-parchment-dark text-sepia-700 hover:text-copper hover:bg-parchment-light transition-colors border border-parchment-line"
                   >
                     {manga.title}
                   </Link>
                 )}
-                <time className="text-[10px] text-gray-600 ml-auto" dateTime={article.publishedAt}>
+                <time className="text-[10px] text-sepia-500 ml-auto" dateTime={article.publishedAt}>
                   {new Date(article.publishedAt).toLocaleDateString('ja-JP', {
                     year: 'numeric',
                     month: 'long',
@@ -129,7 +129,7 @@ export default async function ArticlePage({ params }: PageProps) {
               </div>
 
               {/* Title */}
-              <h1 className="text-2xl md:text-3xl font-black text-white leading-tight mb-6">
+              <h1 className="font-serif text-2xl md:text-3xl font-extrabold text-sepia-900 leading-relaxed tracking-wide mb-6 pb-4 border-b-[3px] border-double border-brass-dark/50">
                 {article.title}
               </h1>
 
@@ -141,16 +141,16 @@ export default async function ArticlePage({ params }: PageProps) {
 
               {/* Table of Contents */}
               {article.sections.length > 2 && (
-                <div className="bg-[#1a1a28] rounded p-4 mb-8 border border-[#1e1e2e]">
-                  <h2 className="text-sm font-black text-[#dc2626] mb-3">◆ 目次</h2>
+                <div className="bg-parchment-dark/60 double-rule p-4 mb-8">
+                  <h2 className="font-serif text-sm font-extrabold text-copper tracking-[0.1em] mb-3 pb-2 border-b border-parchment-line">◆ 目次 — 捜査手順</h2>
                   <ol className="space-y-1.5">
                     {article.sections.map((section, i) => (
                       <li key={i}>
                         <a
                           href={`#section-${i}`}
-                          className="text-sm text-gray-400 hover:text-[#dc2626] transition-colors flex items-center gap-2"
+                          className="text-sm text-sepia-700 hover:text-copper transition-colors flex items-center gap-2"
                         >
-                          <span className="text-[10px] font-black text-gray-600 w-5 text-right">
+                          <span className="font-serif text-[10px] font-extrabold text-brass-dark w-5 text-right">
                             {String(i + 1).padStart(2, '0')}
                           </span>
                           {section.heading}
@@ -198,13 +198,13 @@ export default async function ArticlePage({ params }: PageProps) {
               <AdBanner size="full" />
 
               {/* Tags */}
-              <div className="flex items-center gap-2 flex-wrap mt-8 pt-6 border-t border-[#1e1e2e]">
-                <span className="text-xs text-gray-600 font-bold">タグ:</span>
+              <div className="flex items-center gap-2 flex-wrap mt-8 pt-6 border-t border-parchment-line">
+                <span className="text-xs text-sepia-500 font-bold">タグ:</span>
                 {article.tags.map(tag => (
                   <Link
                     key={tag}
                     href={`/tag/${tagToSlug(tag)}`}
-                    className="text-[10px] text-gray-400 bg-[#1a1a28] border border-[#1e1e2e] px-3 py-2 rounded hover:border-[#dc2626]/40 hover:text-[#dc2626] transition-colors inline-block"
+                    className="text-[10px] text-sepia-700 bg-parchment-dark border border-parchment-line px-3 py-2 rounded-sm hover:border-brass-dark hover:text-copper transition-colors inline-block"
                   >
                     #{tag}
                   </Link>
@@ -227,11 +227,10 @@ export default async function ArticlePage({ params }: PageProps) {
             {/* Related Articles */}
             {relatedArticles.length > 0 && (
               <div className="mt-8">
-                <h2 className="text-lg font-black text-white mb-4 flex items-center gap-2">
-                  <span className="text-[#dc2626]">▎</span>
+                <h2 className="study-heading text-lg mb-4">
                   関連する伏線考察
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {relatedArticles.map(a => (
                     <ArticleCard key={a.slug} article={a} />
                   ))}
@@ -247,11 +246,10 @@ export default async function ArticlePage({ params }: PageProps) {
               if (categoryArticles.length === 0) return null;
               return (
                 <div className="mt-8">
-                  <h2 className="text-lg font-black text-white mb-4 flex items-center gap-2">
-                    <span className="text-[#f59e0b]">▎</span>
+                  <h2 className="study-heading text-lg mb-4">
                     「{CATEGORY_LABELS[article.category]}」の他の記事
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {categoryArticles.map(a => (
                       <ArticleCard key={a.slug} article={a} />
                     ))}
@@ -261,17 +259,17 @@ export default async function ArticlePage({ params }: PageProps) {
             })()}
 
             {/* Category Navigation */}
-            <div className="mt-8 bg-[#12121c] rounded border border-[#1e1e2e] p-5">
-              <h3 className="text-sm font-black text-white mb-3">カテゴリで探す</h3>
+            <div className="mt-8 panel double-rule p-5">
+              <h3 className="font-serif text-sm font-bold text-parchment tracking-[0.1em] mb-3">カテゴリで探す</h3>
               <div className="flex gap-2 flex-wrap">
                 {(Object.entries(CATEGORY_LABELS) as [ArticleCategory, string][]).map(([key, label]) => (
                   <Link
                     key={key}
                     href={`/category/${key}`}
-                    className={`text-xs font-bold px-3 py-1.5 rounded border transition-colors ${
+                    className={`text-xs font-bold px-3 py-1.5 rounded-sm border transition-colors ${
                       key === article.category
-                        ? 'bg-[#dc2626] text-white border-[#dc2626]'
-                        : 'bg-transparent text-gray-400 border-[#1e1e2e] hover:border-[#dc2626] hover:text-[#dc2626]'
+                        ? 'bg-brass text-ink-deep border-brass'
+                        : 'bg-transparent text-mist border-ink-line hover:border-brass hover:text-brass-light'
                     }`}
                   >
                     {label}

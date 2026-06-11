@@ -16,10 +16,10 @@ export default function Sidebar() {
     <aside className="space-y-6">
       <AdBanner size="medium" />
 
-      {/* Popular articles */}
+      {/* Popular articles — the investigation board */}
       {popular.length > 0 && (
-        <div className="bg-[#12121c] rounded border border-[#1e1e2e] p-4">
-          <h3 className="text-xs font-black text-[#dc2626] mb-3">
+        <div className="panel double-rule p-4">
+          <h3 className="font-serif text-xs font-bold text-brass tracking-[0.15em] mb-3 pb-2 border-b border-ink-line">
             人気の伏線考察
           </h3>
           <div className="space-y-2">
@@ -30,19 +30,13 @@ export default function Sidebar() {
                 className="flex items-start gap-2.5 group py-1"
               >
                 <span
-                  className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black shrink-0 ${
-                    i === 0
-                      ? 'bg-[#f59e0b] text-[#0a0a12]'
-                      : i === 1
-                        ? 'bg-[#b0b0c0] text-[#0a0a12]'
-                        : i === 2
-                          ? 'bg-[#cd7f32] text-[#0a0a12]'
-                          : 'bg-[#1c1c28] text-gray-400 border border-[#282838]'
+                  className={`rank-badge ${
+                    i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : 'rank-other'
                   }`}
                 >
                   {i + 1}
                 </span>
-                <span className="text-xs text-gray-400 group-hover:text-[#dc2626] transition-colors leading-snug line-clamp-2">
+                <span className="text-xs text-mist group-hover:text-brass-light transition-colors leading-snug line-clamp-2">
                   {article.title}
                 </span>
               </Link>
@@ -54,8 +48,8 @@ export default function Sidebar() {
       <GoogleAd format="rectangle" />
 
       {/* Affiliate — compact */}
-      <div className="bg-[#12121c] rounded border border-[#1e1e2e] p-4">
-        <h3 className="text-xs font-black text-[#f59e0b] mb-3">
+      <div className="panel double-rule p-4">
+        <h3 className="font-serif text-xs font-bold text-brass tracking-[0.15em] mb-3 pb-2 border-b border-ink-line">
           電子書籍サービス
         </h3>
         <div className="space-y-2">
@@ -65,21 +59,21 @@ export default function Sidebar() {
               href={a.url}
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className="flex items-center gap-3 p-2 rounded border border-[#1e1e2e] hover:border-[#282838] transition-colors"
+              className="flex items-center gap-3 p-2 rounded-sm border border-ink-line hover:border-brass/50 hover:bg-ink-raised transition-colors"
             >
               <div
                 className="w-1 h-7 rounded-full flex-shrink-0"
                 style={{ backgroundColor: a.color }}
               />
               <div className="min-w-0 flex-1">
-                <span className="text-xs font-bold text-gray-200 block">{a.title}</span>
-                <span className="text-[10px] text-gray-600 line-clamp-1">{a.description}</span>
+                <span className="text-xs font-bold text-parchment block">{a.title}</span>
+                <span className="text-[10px] text-mist-dim line-clamp-1">{a.description}</span>
               </div>
             </a>
           ))}
           {generalAffiliates.length > 4 && (
             <details className="mt-1">
-              <summary className="text-[10px] text-gray-600 cursor-pointer hover:text-[#f59e0b] transition-colors">
+              <summary className="text-[10px] text-mist-dim cursor-pointer hover:text-brass-light transition-colors">
                 他のサービス（{generalAffiliates.length - 4}件）
               </summary>
               <div className="space-y-2 mt-2">
@@ -89,15 +83,15 @@ export default function Sidebar() {
                     href={a.url}
                     target="_blank"
                     rel="noopener noreferrer nofollow"
-                    className="flex items-center gap-3 p-2 rounded border border-[#1e1e2e] hover:border-[#282838] transition-colors"
+                    className="flex items-center gap-3 p-2 rounded-sm border border-ink-line hover:border-brass/50 hover:bg-ink-raised transition-colors"
                   >
                     <div
                       className="w-1 h-7 rounded-full flex-shrink-0"
                       style={{ backgroundColor: a.color }}
                     />
                     <div className="min-w-0 flex-1">
-                      <span className="text-xs font-bold text-gray-200 block">{a.title}</span>
-                      <span className="text-[10px] text-gray-600 line-clamp-1">{a.description}</span>
+                      <span className="text-xs font-bold text-parchment block">{a.title}</span>
+                      <span className="text-[10px] text-mist-dim line-clamp-1">{a.description}</span>
                     </div>
                   </a>
                 ))}
@@ -108,8 +102,8 @@ export default function Sidebar() {
       </div>
 
       {/* Categories */}
-      <div className="bg-[#12121c] rounded border border-[#1e1e2e] p-4">
-        <h3 className="text-xs font-black text-gray-400 mb-3">
+      <div className="panel double-rule p-4">
+        <h3 className="font-serif text-xs font-bold text-brass tracking-[0.15em] mb-3 pb-2 border-b border-ink-line">
           カテゴリ
         </h3>
         <div className="space-y-1">
@@ -117,7 +111,7 @@ export default function Sidebar() {
             <Link
               key={key}
               href={`/category/${key}/`}
-              className="block py-1 text-xs text-gray-400 hover:text-[#dc2626] transition-colors"
+              className="block py-1.5 text-xs text-mist hover:text-brass-light hover:translate-x-0.5 transition-all"
             >
               {label}
             </Link>
@@ -126,8 +120,8 @@ export default function Sidebar() {
       </div>
 
       {/* Popular Tags */}
-      <div className="bg-[#12121c] rounded border border-[#1e1e2e] p-4">
-        <h3 className="text-xs font-black text-gray-400 mb-3">
+      <div className="panel double-rule p-4">
+        <h3 className="font-serif text-xs font-bold text-brass tracking-[0.15em] mb-3 pb-2 border-b border-ink-line">
           タグ
         </h3>
         <div className="flex flex-wrap gap-1.5">
@@ -135,7 +129,7 @@ export default function Sidebar() {
             <Link
               key={tag}
               href={`/tag/${tagToSlug(tag)}`}
-              className="text-[10px] text-gray-600 hover:text-[#dc2626] transition-colors"
+              className="text-[10px] text-mist-dim hover:text-brass-light transition-colors"
             >
               #{tag}
             </Link>
@@ -143,15 +137,15 @@ export default function Sidebar() {
         </div>
         <Link
           href="/tags"
-          className="inline-block text-[10px] text-[#dc2626] hover:text-[#f59e0b] mt-2 transition-colors"
+          className="inline-block text-[10px] text-brass hover:text-brass-light mt-2 transition-colors"
         >
-          すべてのタグ
+          すべてのタグ →
         </Link>
       </div>
 
       {/* Manga list */}
-      <div className="bg-[#12121c] rounded border border-[#1e1e2e] p-4">
-        <h3 className="text-xs font-black text-gray-400 mb-3">
+      <div className="panel double-rule p-4">
+        <h3 className="font-serif text-xs font-bold text-brass tracking-[0.15em] mb-3 pb-2 border-b border-ink-line">
           作品一覧
         </h3>
         <div className="space-y-0.5">
@@ -159,13 +153,13 @@ export default function Sidebar() {
             <Link
               key={m.slug}
               href={`/manga/${m.slug}/`}
-              className="flex items-center gap-2 py-1 group"
+              className="flex items-center gap-2 py-1.5 group"
             >
               <span
-                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                className="w-1.5 h-1.5 rounded-full flex-shrink-0 ring-1 ring-black/20"
                 style={{ backgroundColor: m.coverColor }}
               />
-              <span className="text-xs text-gray-400 group-hover:text-[#dc2626] transition-colors">
+              <span className="text-xs text-mist group-hover:text-brass-light transition-colors">
                 {m.title}
               </span>
             </Link>

@@ -71,23 +71,23 @@ export default async function CategoryPage({ params }: PageProps) {
     <div className="mx-auto max-w-7xl px-4 py-8 relative z-10">
       {/* Header */}
       <div className="mb-8">
-        <nav className="text-xs text-gray-600 mb-3 flex items-center gap-1">
-          <Link href="/" className="hover:text-[#dc2626] transition-colors">ホーム</Link>
-          <span className="text-gray-700">/</span>
-          <span className="text-gray-400">{title}</span>
+        <nav className="text-xs text-mist-dim mb-3 flex items-center gap-1">
+          <Link href="/" className="hover:text-brass-light transition-colors">ホーム</Link>
+          <span className="text-ink-line">/</span>
+          <span className="text-mist">{title}</span>
         </nav>
-        <h1 className="text-2xl font-black text-white">{title}</h1>
-        <p className="text-sm text-gray-600 mt-1">{articles.length}件の記事</p>
+        <h1 className="study-heading inline-block text-2xl">{title}</h1>
+        <p className="text-sm text-mist-dim mt-2">{articles.length}件の記事</p>
       </div>
 
       {/* Category Filter Buttons */}
       <div className="flex gap-2 mb-6 flex-wrap">
         <Link
           href="/category/all"
-          className={`text-xs font-bold px-3 py-1.5 rounded border transition-colors ${
+          className={`text-xs font-bold px-3 py-1.5 rounded-sm border transition-colors ${
             slug === 'all'
-              ? 'bg-[#dc2626] text-white border-[#dc2626]'
-              : 'bg-transparent text-gray-400 border-[#1e1e2e] hover:border-[#dc2626] hover:text-[#dc2626]'
+              ? 'bg-brass text-ink-deep border-brass'
+              : 'bg-transparent text-mist border-ink-line hover:border-brass hover:text-brass-light'
           }`}
         >
           すべて
@@ -96,10 +96,10 @@ export default async function CategoryPage({ params }: PageProps) {
           <Link
             key={key}
             href={`/category/${key}`}
-            className={`text-xs font-bold px-3 py-1.5 rounded border transition-colors ${
+            className={`text-xs font-bold px-3 py-1.5 rounded-sm border transition-colors ${
               slug === key
-                ? 'bg-[#dc2626] text-white border-[#dc2626]'
-                : 'bg-transparent text-gray-400 border-[#1e1e2e] hover:border-[#dc2626] hover:text-[#dc2626]'
+                ? 'bg-brass text-ink-deep border-brass'
+                : 'bg-transparent text-mist border-ink-line hover:border-brass hover:text-brass-light'
             }`}
           >
             {label}
@@ -114,15 +114,15 @@ export default async function CategoryPage({ params }: PageProps) {
         <div className="flex-1 min-w-0">
           {articles.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-gray-400 text-lg mb-2">記事が見つかりませんでした</p>
-              <Link href="/" className="text-sm text-[#dc2626] hover:text-[#f59e0b] font-bold">
+              <p className="text-mist text-lg mb-2">記事が見つかりませんでした</p>
+              <Link href="/" className="text-sm text-brass hover:text-brass-light font-bold">
                 トップページに戻る
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {articles.map(article => (
-                <ArticleCard key={article.slug} article={article} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {articles.map((article, i) => (
+                <ArticleCard key={article.slug} article={article} index={i} />
               ))}
             </div>
           )}

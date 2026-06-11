@@ -22,15 +22,15 @@ export default function PrivacyPage() {
   return (
     <>
       <div className="mx-auto max-w-4xl px-4 py-8 relative z-10">
-        <nav className="text-xs text-gray-600 mb-3 flex items-center gap-1">
-          <Link href="/" className="hover:text-[#dc2626] transition-colors">ホーム</Link>
-          <span className="text-gray-700">/</span>
-          <span className="text-gray-400">プライバシーポリシー</span>
+        <nav className="text-xs text-mist-dim mb-3 flex items-center gap-1">
+          <Link href="/" className="hover:text-brass-light transition-colors">ホーム</Link>
+          <span className="text-ink-line">/</span>
+          <span className="text-mist">プライバシーポリシー</span>
         </nav>
 
-        <h1 className="text-2xl font-black text-white mb-8">プライバシーポリシー</h1>
+        <h1 className="study-heading inline-block text-2xl mb-8">プライバシーポリシー</h1>
 
-        <div className="bg-[#12121c] rounded border-2 border-[#1e1e2e] p-6 md:p-8">
+        <div className="paper double-rule p-6 md:p-8">
           <div className="article-content">
             <p>
               伏線回収ラボ（以下「当サイト」）は、ユーザーの皆様の個人情報の保護を重要視しております。
@@ -54,7 +54,7 @@ export default function PrivacyPage() {
               この機能はCookieを無効にすることで収集を拒否することができますので、
               お使いのブラウザの設定をご確認ください。
               Google Analyticsの利用規約については、
-              <a href="https://marketingplatform.google.com/about/analytics/terms/jp/" target="_blank" rel="noopener noreferrer" className="text-[#f59e0b] hover:underline">Google Analytics利用規約</a>をご覧ください。
+              <a href="https://marketingplatform.google.com/about/analytics/terms/jp/" target="_blank" rel="noopener noreferrer" className="text-copper font-semibold hover:underline">Google Analytics利用規約</a>をご覧ください。
             </p>
 
             <h2>広告配信について</h2>
@@ -66,14 +66,14 @@ export default function PrivacyPage() {
               Cookieを使用することにより、ユーザーが当サイトや他のサイトにアクセスした際の情報に基づき、
               適切な広告を表示することが可能になります。
               Cookieを無効にする設定およびGoogleアドセンスに関する詳細は、
-              <a href="https://policies.google.com/technologies/ads?hl=ja" target="_blank" rel="noopener noreferrer" className="text-[#f59e0b] hover:underline">広告 - ポリシーと規約 - Google</a>をご覧ください。
+              <a href="https://policies.google.com/technologies/ads?hl=ja" target="_blank" rel="noopener noreferrer" className="text-copper font-semibold hover:underline">広告 - ポリシーと規約 - Google</a>をご覧ください。
             </p>
 
             <h2>第三者配信事業者によるCookieの使用</h2>
             <p>
               第三者配信事業者は、ユーザーの興味に応じた広告を表示するためにCookie（DART Cookie等）を使用することがあります。
               ユーザーは、広告設定でパーソナライズ広告を無効にすることができます。
-              また、<a href="https://www.aboutads.info/" target="_blank" rel="noopener noreferrer" className="text-[#f59e0b] hover:underline">www.aboutads.info</a>にアクセスすることで、
+              また、<a href="https://www.aboutads.info/" target="_blank" rel="noopener noreferrer" className="text-copper font-semibold hover:underline">www.aboutads.info</a>にアクセスすることで、
               第三者配信事業者がパーソナライズ広告の配信に使用するCookieを無効にすることができます。
             </p>
 
@@ -86,7 +86,7 @@ export default function PrivacyPage() {
               リンク先の商品・サービスをご購入・ご利用いただいた場合、当サイトに報酬が支払われることがあります。
               ただし、アフィリエイトリンクの有無が記事の内容や評価に影響を与えることはありません。
             </p>
-            <ul className="list-disc list-inside space-y-1 mb-6 text-[#c0c0d0]">
+            <ul className="list-disc list-inside space-y-1 mb-6 text-sepia-700">
               <li>もしもアフィリエイト</li>
               <li>A8.net</li>
               <li>バリューコマース</li>
@@ -108,10 +108,10 @@ export default function PrivacyPage() {
             <h2>お問い合わせ先</h2>
             <p>
               本ポリシーに関するお問い合わせは、
-              <Link href="/contact" className="text-[#f59e0b] hover:underline">お問い合わせページ</Link>よりお願いいたします。
+              <Link href="/contact" className="text-copper font-semibold hover:underline">お問い合わせページ</Link>よりお願いいたします。
             </p>
 
-            <div className="mt-8 pt-6 border-t border-[#282838] text-sm text-gray-400">
+            <div className="mt-8 pt-6 border-t border-parchment-line text-sm text-sepia-500">
               <p className="mb-0">制定日：2026年3月11日</p>
             </div>
           </div>

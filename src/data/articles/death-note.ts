@@ -3,7 +3,7 @@ import { Article } from '@/lib/types';
 export const articles: Article[] = [
   {
     slug: 'death-note-l-real-name-13-day-rule',
-    title: '【DEATH NOTE】Lの本名と13日ルールの伏線回収｜天才対決に隠された布石を徹底解説',
+    title: '【DEATH NOTE】Lの本名と13日ルールの真相｜天才対決の伏線5選を徹底解説',
     mangaSlug: 'death-note',
     category: 'resolved',
     excerpt: 'DEATH NOTEにおけるLの本名「L Lawliet」の伏線と、キラを追い詰めるはずだった13日ルールの真相。大場つぐみが仕掛けた知的トラップの全貌を解き明かす。',
@@ -34,7 +34,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'death-note-shinigami-world-rules-mystery',
-    title: '【DEATH NOTE】死神の世界のルールと残る謎｜明かされなかった死神界の秘密を追跡',
+    title: '【DEATH NOTE】死神界の未回収伏線7つ｜明かされなかった秘密を徹底考察【2026最新】',
     mangaSlug: 'death-note',
     category: 'unresolved',
     excerpt: 'DEATH NOTEの物語を支えるデスノートのルールと死神界。リュークやレムの言動から読み取れる死神の世界の法則と、最終話でも解明されなかった謎を徹底追跡する。',
@@ -65,7 +65,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'death-note-near-mello-relationship-theory',
-    title: '【DEATH NOTE】ニアとメロの関係性に隠された伏線｜LのDNAを継ぐ二人の後継者を考察',
+    title: '【DEATH NOTE】ニアとメロはなぜLを超えられなかった？後継者に隠された伏線5選',
     mangaSlug: 'death-note',
     category: 'theory',
     excerpt: 'Lの後継者として育てられたニアとメロ。対照的な二人の関係性には、Lが意図的に仕掛けた「後継者計画」の伏線が隠されているのではないか。その真相を考察する。',
@@ -96,7 +96,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'death-note-ohba-foreshadowing-techniques',
-    title: '【DEATH NOTE】大場つぐみの伏線テクニック徹底分析｜ルール説明・心理描写・情報制御の技法',
+    title: '【DEATH NOTE】大場つぐみの伏線テクニック7選｜プロも唸る情報制御の技法を完全解剖',
     mangaSlug: 'death-note',
     category: 'technique',
     excerpt: 'DEATH NOTEの伏線が他作品と一線を画す理由を、大場つぐみの具体的なテクニックから分析。デスノートのルール説明を伏線化する手法、心理描写の二重構造、情報の意図的な制御技法を解説する。',
@@ -127,7 +127,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'death-note-foreshadowing-timeline',
-    title: '【DEATH NOTE】伏線タイムライン完全版｜第1話から最終話までの全伏線を時系列で整理',
+    title: '【DEATH NOTE】伏線タイムライン完全版｜1話〜最終話の全伏線を時系列で整理【保存版】',
     mangaSlug: 'death-note',
     category: 'timeline',
     excerpt: 'DEATH NOTEの伏線を第1話から時系列順に整理。月がデスノートを拾ってからキラとして破滅するまで、全ての伏線と回収状況を一覧で追える完全ガイド。',
@@ -158,7 +158,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'death-note-light-plans-timeline-analysis',
-    title: '【DEATH NOTE】夜神月の計画の時系列分析——全ての行動は何手先を読んでいたか',
+    title: '【DEATH NOTE】夜神月は何手先を読んでいた？計画の時系列分析で見えた天才の思考',
     mangaSlug: 'death-note',
     category: 'timeline',
     excerpt: 'デスノートを拾った瞬間から最期の瞬間まで。夜神月の計画を時系列で追い、各時点で彼が何手先まで読んでいたのかを分析する。',

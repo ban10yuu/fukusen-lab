@@ -3,7 +3,7 @@ import { Article } from '@/lib/types';
 export const articles: Article[] = [
   {
     slug: 'jujutsu-kaisen-yuji-birth-secret-kenjaku',
-    title: '【呪術廻戦】虎杖悠仁の出生の秘密と羂索の計画',
+    title: '【呪術廻戦】虎杖悠仁の出生の秘密5つ｜羂索の千年計画で回収された衝撃の伏線',
     mangaSlug: 'jujutsu-kaisen',
     category: 'resolved',
     excerpt: '虎杖悠仁の出生に隠された衝撃の真実。母親・香織の正体、羂索による千年の計画、そして宿儺の器として生まれた運命の伏線回収を徹底解説。',
@@ -34,7 +34,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'jujutsu-kaisen-unresolved-foreshadowing',
-    title: '【呪術廻戦】未回収伏線まとめ｜完結後も残る7つの謎',
+    title: '【呪術廻戦】未回収伏線7選｜完結後も明かされない最大の謎【2026最新】',
     mangaSlug: 'jujutsu-kaisen',
     category: 'unresolved',
     excerpt: '呪術廻戦が完結した今も回収されていない伏線を徹底整理。天元の真意、日車の術式の本質、来栖華の記憶など、気になる未回収伏線を解説。',
@@ -65,7 +65,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'jujutsu-kaisen-gojo-seal-revival-foreshadowing',
-    title: '【呪術廻戦】五条悟の封印と復活に隠された伏線を考察',
+    title: '【呪術廻戦】五条悟はなぜ封印された？復活への伏線を完全考察',
     mangaSlug: 'jujutsu-kaisen',
     category: 'theory',
     excerpt: '五条悟の獄門疆封印から復活までの展開に散りばめられた伏線を徹底考察。渋谷事変の前兆、封印の条件、そして復活後の最強の姿に至る伏線の構造。',
@@ -96,7 +96,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'jujutsu-kaisen-akutami-foreshadowing-technique',
-    title: '【呪術廻戦】芥見下々の伏線テクニック｜扉絵・巻末コメント・構図に隠された仕掛け',
+    title: '【呪術廻戦】芥見下々の伏線テクニック5選｜プロしか気づかない扉絵・コメントの仕掛け',
     mangaSlug: 'jujutsu-kaisen',
     category: 'technique',
     excerpt: '芥見下々先生が駆使する伏線テクニックを徹底分析。扉絵に込められた暗示、巻末コメントのメタ的仕掛け、コマ割りの工夫まで、技法の全体像に迫る。',
@@ -127,7 +127,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'jujutsu-kaisen-foreshadowing-timeline',
-    title: '【呪術廻戦】伏線タイムライン｜1話から最終話まで伏線の流れを時系列で追う',
+    title: '【呪術廻戦】伏線タイムライン完全版｜1話〜最終話の全伏線を時系列で整理【保存版】',
     mangaSlug: 'jujutsu-kaisen',
     category: 'timeline',
     excerpt: '呪術廻戦の伏線を時系列で整理。第1話の宿儺の指から最終話まで、張られた伏線と回収のタイミングを一覧で追う完全版タイムライン。',
@@ -158,7 +158,7 @@ export const articles: Article[] = [
   },
   {
     slug: 'jujutsu-kaisen-shibuya-incident-resolved-threads',
-    title: '【呪術廻戦】渋谷事変で回収された伏線の全貌——物語の転換点を分析',
+    title: '【呪術廻戦】渋谷事変の回収伏線12選｜物語最大の転換点を徹底分析',
     mangaSlug: 'jujutsu-kaisen',
     category: 'resolved',
     excerpt: '呪術廻戦最大の転換点・渋谷事変で回収された伏線を徹底分析。五条悟の封印、偽夏油の正体、虎杖悠仁の覚醒など、怒涛の伏線回収劇を解説する。',

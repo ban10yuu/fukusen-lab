@@ -73,8 +73,8 @@ export default async function MangaPage({ params }: PageProps) {
     <div className="mx-auto max-w-7xl px-4 py-8 relative z-10">
       {/* Manga Header */}
       <div
-        className="manga-panel !border-2 p-6 md:p-8 mb-8 relative overflow-hidden"
-        style={{ borderColor: manga.coverColor }}
+        className="panel p-6 md:p-8 mb-8 relative overflow-hidden"
+        style={{ border: `3px double ${manga.coverColor}` }}
       >
         <div
           className="absolute inset-0 opacity-10"
@@ -82,17 +82,17 @@ export default async function MangaPage({ params }: PageProps) {
         />
         <div className="relative z-10">
           {/* Breadcrumb */}
-          <nav className="text-xs text-gray-600 mb-3 flex items-center gap-1">
-            <Link href="/" className="hover:text-[#dc2626] transition-colors">ホーム</Link>
-            <span className="text-gray-700">/</span>
-            <span className="text-gray-400">{manga.title}</span>
+          <nav className="text-xs text-mist-dim mb-3 flex items-center gap-1">
+            <Link href="/" className="hover:text-brass-light transition-colors">ホーム</Link>
+            <span className="text-ink-line">/</span>
+            <span className="text-mist">{manga.title}</span>
           </nav>
 
           {/* Title & Info */}
-          <h1 className="text-2xl md:text-3xl font-black text-white mb-2">{manga.title}</h1>
-          <p className="text-sm text-gray-400 mb-3">
-            <span className="text-gray-400">作者：{manga.author}</span>
-            <span className="mx-2 text-gray-700">|</span>
+          <h1 className="font-serif text-2xl md:text-3xl font-extrabold text-parchment tracking-wide mb-2">{manga.title}</h1>
+          <p className="text-sm text-mist mb-3">
+            <span className="text-mist">作者：{manga.author}</span>
+            <span className="mx-2 text-ink-line">|</span>
             <span
               className="font-bold text-xs px-2 py-0.5 rounded"
               style={{
@@ -104,14 +104,14 @@ export default async function MangaPage({ params }: PageProps) {
               {manga.status === 'ongoing' ? '連載中' : '完結済み'}
             </span>
           </p>
-          <p className="text-sm text-gray-400 max-w-2xl leading-relaxed mb-4">{manga.description}</p>
+          <p className="text-sm text-mist max-w-2xl leading-relaxed mb-4">{manga.description}</p>
 
           {/* Genre Tags */}
           <div className="flex flex-wrap gap-2">
             {manga.genre.map(g => (
               <span
                 key={g}
-                className="text-[10px] font-bold px-2.5 py-1 rounded bg-[#1a1a28] text-gray-400 border border-[#1e1e2e]"
+                className="text-[10px] font-bold px-2.5 py-1 rounded-sm bg-ink-raised text-mist border border-ink-line"
               >
                 {g}
               </span>
@@ -130,27 +130,26 @@ export default async function MangaPage({ params }: PageProps) {
         {/* Articles Grid */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-black text-white flex items-center gap-2">
-              <span className="text-[#dc2626]">▎</span>
+            <h2 className="study-heading text-lg flex-1">
               伏線考察記事一覧
-              <span className="text-sm font-normal text-gray-600">({articles.length}件)</span>
+              <span className="text-sm font-normal text-mist-dim ml-2">({articles.length}件)</span>
             </h2>
           </div>
 
           {articles.length === 0 ? (
-            <div className="text-center py-16 bg-[#12121c] rounded border border-[#1e1e2e]">
-              <p className="text-gray-400 text-lg mb-2">まだ記事がありません</p>
-              <p className="text-gray-600 text-sm mb-4">
+            <div className="text-center py-16 panel">
+              <p className="text-mist text-lg mb-2">まだ記事がありません</p>
+              <p className="text-mist-dim text-sm mb-4">
                 {manga.title}の伏線考察記事を準備中です。
               </p>
-              <Link href="/" className="text-sm text-[#dc2626] hover:text-[#f59e0b] font-bold">
+              <Link href="/" className="text-sm text-brass hover:text-brass-light font-bold">
                 トップページに戻る
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {articles.map(article => (
-                <ArticleCard key={article.slug} article={article} showManga={false} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {articles.map((article, i) => (
+                <ArticleCard key={article.slug} article={article} showManga={false} index={i} />
               ))}
             </div>
           )}

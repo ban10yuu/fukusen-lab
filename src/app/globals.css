@@ -1,13 +1,48 @@
 @import "tailwindcss";
 
+/* ============================================================
+   伏線回収ラボ — "Detective's Study" theme
+   Deep forest-green ink base / aged parchment surfaces /
+   brass & copper accents / Japanese serif headings
+   ============================================================ */
+
+:root {
+  /* Fonts loaded via Google Fonts <link> in layout head */
+  --font-noto-sans: "Noto Sans JP";
+  --font-shippori: "Shippori Mincho";
+}
+
 @theme inline {
-  --font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
-  --color-fukusen-red: #dc2626;
-  --color-fukusen-gold: #f59e0b;
-  --color-bg-primary: #0a0a12;
-  --color-bg-surface: #14141e;
-  --color-bg-elevated: #1c1c28;
-  --color-border-default: #282838;
+  --font-sans: var(--font-noto-sans), "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  --font-serif: var(--font-shippori), "Hiragino Mincho ProN", "Yu Mincho", serif;
+
+  /* Ink (deep forest green) */
+  --color-ink-deep: #0d1d19;
+  --color-ink: #11241f;
+  --color-ink-surface: #16302a;
+  --color-ink-raised: #1d3b33;
+  --color-ink-line: #2c4c43;
+
+  /* Parchment */
+  --color-parchment: #efe7d6;
+  --color-parchment-light: #f7f1e2;
+  --color-parchment-dark: #e6dabf;
+  --color-parchment-line: #d3c4a2;
+
+  /* Ink text on parchment */
+  --color-sepia-900: #2b251b;
+  --color-sepia-700: #4c4334;
+  --color-sepia-500: #7c7158;
+
+  /* Light text on green */
+  --color-mist: #c8bfa6;
+  --color-mist-dim: #8fa298;
+
+  /* Metals */
+  --color-brass: #c9a35e;
+  --color-brass-light: #dcbe7e;
+  --color-brass-dark: #a4823f;
+  --color-copper: #b06a3b;
 }
 
 html {
@@ -15,87 +50,148 @@ html {
 }
 
 body {
-  background-color: #0a0a12;
-  color: #b0b0c0;
-  font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  background-color: #11241f;
+  /* subtle desk-lamp vignette + faint woven texture */
+  background-image:
+    radial-gradient(ellipse 120% 60% at 50% -10%, rgba(201, 163, 94, 0.07), transparent 60%),
+    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(13, 29, 25, 0.5) 3px, rgba(13, 29, 25, 0.5) 4px);
+  color: #c8bfa6;
+  font-family: var(--font-noto-sans), "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
   position: relative;
 }
 
-
-/* Manga panel frame card */
-.manga-panel {
-  background: #14141e;
-  border: 2px solid #282838;
-  border-radius: 4px;
-  transition: all 0.25s ease;
-}
-.manga-panel:hover {
-  border-color: #dc2626;
+::selection {
+  background: rgba(201, 163, 94, 0.35);
+  color: #f7f1e2;
 }
 
-/* Accent left border panel */
-.accent-panel {
-  border-left: 4px solid #dc2626;
+/* ------------------------------------------------------------
+   Surfaces
+   ------------------------------------------------------------ */
+
+/* Aged-parchment sheet (paper texture via CSS gradients only) */
+.paper {
+  background-color: #efe7d6;
+  background-image:
+    radial-gradient(ellipse 90% 70% at 50% 0%, rgba(255, 252, 240, 0.7), transparent 70%),
+    radial-gradient(ellipse 120% 80% at 50% 110%, rgba(176, 106, 59, 0.08), transparent 60%),
+    repeating-linear-gradient(0deg, transparent, transparent 5px, rgba(124, 113, 88, 0.04) 5px, rgba(124, 113, 88, 0.04) 6px),
+    repeating-linear-gradient(90deg, transparent, transparent 7px, rgba(124, 113, 88, 0.03) 7px, rgba(124, 113, 88, 0.03) 8px);
+  color: #4c4334;
 }
 
-/* Article content styles — dark foreshadowing theme (mobile-first) */
+/* Dark study panel (green leather blotter) */
+.panel {
+  background-color: #16302a;
+  background-image:
+    radial-gradient(ellipse 100% 80% at 50% 0%, rgba(201, 163, 94, 0.05), transparent 65%);
+  border: 1px solid #2c4c43;
+  border-radius: 2px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.panel:hover {
+  border-color: rgba(201, 163, 94, 0.45);
+}
+
+/* Thin double-rule frame — the signature border of the theme */
+.double-rule {
+  border: 3px double rgba(164, 130, 63, 0.55);
+  border-radius: 2px;
+}
+.double-rule-dark {
+  border: 3px double #2c4c43;
+  border-radius: 2px;
+}
+
+/* Brass small caps label (CASE FILE etc.) */
+.brass-label {
+  font-family: var(--font-shippori), serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #c9a35e;
+  text-transform: uppercase;
+}
+
+/* Section heading: serif with double underline */
+.study-heading {
+  font-family: var(--font-shippori), "Hiragino Mincho ProN", serif;
+  font-weight: 700;
+  color: #efe7d6;
+  letter-spacing: 0.06em;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px double rgba(201, 163, 94, 0.5);
+}
+
+/* ------------------------------------------------------------
+   Article content — printed dossier on aged parchment
+   ------------------------------------------------------------ */
 .article-content h2 {
-  font-size: 1.25rem;
-  font-weight: 900;
-  color: #eaeaf0;
+  font-family: var(--font-shippori), "Hiragino Mincho ProN", serif;
+  font-size: 1.3125rem;
+  font-weight: 800;
+  color: #2b251b;
+  letter-spacing: 0.04em;
   margin-top: 3rem;
   margin-bottom: 1.25rem;
-  padding: 0.75rem 0.85rem;
-  border-left: 4px solid #dc2626;
-  border-bottom: none;
-  background: linear-gradient(to right, rgba(220,38,38,0.08), transparent);
+  padding: 0.6rem 0.25rem;
+  border-top: 3px double rgba(164, 130, 63, 0.6);
+  border-bottom: 1px solid rgba(164, 130, 63, 0.35);
+  line-height: 1.55;
   position: relative;
-  line-height: 1.5;
 }
 
 .article-content h3 {
-  font-size: 1.0625rem;
+  font-family: var(--font-shippori), "Hiragino Mincho ProN", serif;
+  font-size: 1.0938rem;
   font-weight: 700;
-  color: #d0d0df;
+  color: #4c4334;
+  letter-spacing: 0.03em;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
   padding-left: 0.75rem;
-  border-left: 3px solid #f59e0b;
+  border-left: 3px solid #b06a3b;
 }
 
 .article-content p {
   font-size: 0.9375rem;
   line-height: 2.1;
-  color: #c0c0d0;
+  color: #4c4334;
   margin-bottom: 1.5rem;
   letter-spacing: 0.02em;
 }
 
 .article-content strong {
-  color: #f59e0b;
+  color: #8a4f24;
   font-weight: 700;
 }
 
-/* Marker underlines */
+.article-content a {
+  color: #8a6428;
+}
+
+/* Marker underlines — brass & copper ink */
 .article-content .marker {
-  background: linear-gradient(transparent 60%, rgba(220,38,38,0.3) 60%);
+  background: linear-gradient(transparent 62%, rgba(201, 163, 94, 0.45) 62%);
   font-weight: 700;
-  color: #eaeaf0;
+  color: #2b251b;
   padding: 0 2px;
 }
 
 .article-content .marker-gold {
-  background: linear-gradient(transparent 60%, rgba(245,158,11,0.25) 60%);
+  background: linear-gradient(transparent 62%, rgba(176, 106, 59, 0.3) 62%);
   font-weight: 700;
-  color: #f59e0b;
+  color: #8a4f24;
   padding: 0 2px;
 }
 
-/* Summary box */
+/* Summary box — investigator's index card */
 .article-content .summary-box {
-  background: #18182a;
-  border: 2px solid #282838;
-  border-radius: 8px;
+  background: #e6dabf;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 5px, rgba(124, 113, 88, 0.05) 5px, rgba(124, 113, 88, 0.05) 6px);
+  border: 3px double rgba(164, 130, 63, 0.6);
+  border-radius: 2px;
   padding: 1.25rem 1.25rem 0.75rem;
   margin: 2rem 0;
   position: relative;
@@ -104,12 +200,14 @@ body {
 .article-content .summary-box::before {
   content: attr(data-title);
   display: block;
+  font-family: var(--font-shippori), serif;
   font-size: 0.8125rem;
-  font-weight: 900;
-  color: #dc2626;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #8a4f24;
   margin-bottom: 0.75rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid #282838;
+  border-bottom: 1px solid rgba(164, 130, 63, 0.4);
 }
 
 .article-content .summary-box p {
@@ -121,50 +219,56 @@ body {
 }
 
 .article-content .summary-box p::before {
-  content: '\25C9';
+  content: '\1F50E\FE0E';
   position: absolute;
   left: 0;
-  color: #dc2626;
-  font-size: 0.75rem;
+  color: #a4823f;
+  font-size: 0.8rem;
 }
 
-/* Highlight box (important points) */
+/* Highlight box — the decisive clue */
 .article-content .highlight-box {
-  background: #1a1520;
-  border: 2px solid rgba(220,38,38,0.25);
-  border-radius: 8px;
-  padding: 1.25rem 1.25rem;
+  background: #16302a;
+  background-image: radial-gradient(ellipse 100% 90% at 50% 0%, rgba(201, 163, 94, 0.08), transparent 70%);
+  border: 3px double rgba(201, 163, 94, 0.55);
+  border-radius: 2px;
+  padding: 1.25rem;
   margin: 2rem 0;
+  font-family: var(--font-shippori), serif;
   font-size: 0.9375rem;
   line-height: 2;
-  color: #eaeaf0;
+  color: #efe7d6;
   font-weight: 700;
+  letter-spacing: 0.04em;
   text-align: center;
 }
 
-/* Note box */
+/* Note box — marginalia */
 .article-content .note-box {
-  background: #18182a;
-  border: 1px solid #282838;
-  border-left: 4px solid #f59e0b;
-  border-radius: 0 8px 8px 0;
+  background: rgba(230, 218, 191, 0.6);
+  border: 1px solid rgba(164, 130, 63, 0.35);
+  border-left: 3px solid #a4823f;
+  border-radius: 0 2px 2px 0;
   padding: 1rem 1.25rem;
   margin: 1.5rem 0;
   font-size: 0.875rem;
-  color: #b0b0c0;
+  color: #5d5240;
   line-height: 1.8;
 }
 
-/* Blockquote */
+/* Blockquote — testimony excerpt */
 .article-content blockquote {
-  background: #1c1c28;
-  border: 2px solid #282838;
-  border-left: 4px solid #dc2626;
-  border-radius: 4px;
+  background: rgba(230, 218, 191, 0.5);
+  border: 1px solid rgba(164, 130, 63, 0.3);
+  border-left: 3px double #a4823f;
+  border-left-style: double;
+  border-left-width: 6px;
+  border-radius: 2px;
   padding: 1.25rem 1.25rem 1.25rem 1.5rem;
   margin: 2rem 0;
+  font-family: var(--font-shippori), serif;
   font-size: 0.9375rem;
-  color: #d0d0df;
+  color: #4c4334;
   line-height: 1.9;
 }
 
@@ -175,23 +279,23 @@ body {
 }
 .article-content .manga-quote img {
   max-width: 100%;
-  border: 2px solid #282838;
-  border-radius: 4px;
+  border: 3px double rgba(164, 130, 63, 0.5);
+  border-radius: 2px;
 }
 .article-content .manga-quote .cite {
   display: block;
   text-align: right;
   font-size: 0.75rem;
-  color: #6a6a80;
+  color: #7c7158;
   margin-top: 0.5rem;
 }
 
 /* Mobile optimization */
 @media (max-width: 640px) {
   .article-content h2 {
-    font-size: 1.125rem;
+    font-size: 1.1875rem;
     margin-top: 2.5rem;
-    padding: 0.625rem 0.75rem;
+    padding: 0.5rem 0.125rem;
   }
   .article-content p {
     font-size: 0.9375rem;
@@ -210,26 +314,31 @@ body {
 /* Desktop adjustments */
 @media (min-width: 768px) {
   .article-content h2 {
-    font-size: 1.375rem;
+    font-size: 1.4375rem;
   }
   .article-content p {
     font-size: 1rem;
   }
 }
 
-/* Dark scrollbar */
+/* ------------------------------------------------------------
+   Chrome details
+   ------------------------------------------------------------ */
+
+/* Scrollbar — lacquered wood & brass */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 9px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a12;
+  background: #0d1d19;
 }
 ::-webkit-scrollbar-thumb {
-  background: #282838;
+  background: #2c4c43;
   border-radius: 4px;
+  border: 1px solid #0d1d19;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #383850;
+  background: #a4823f;
 }
 
 /* Line clamp */
@@ -246,30 +355,31 @@ body {
   overflow: hidden;
 }
 
-/* Rank badge in sidebar */
+/* Rank badge in sidebar — medal seals */
 .rank-badge {
   width: 1.75rem;
   height: 1.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 900;
+  font-family: var(--font-shippori), serif;
+  font-weight: 800;
   font-size: 0.75rem;
-  border-radius: 4px;
+  border-radius: 9999px;
   flex-shrink: 0;
 }
-.rank-1 { background: #dc2626; color: #fff; }
-.rank-2 { background: #f59e0b; color: #0a0a12; }
-.rank-3 { background: #d97706; color: #fff; }
-.rank-other { background: #282838; color: #6a6a80; }
+.rank-1 { background: #c9a35e; color: #11241f; }
+.rank-2 { background: #b8b3a4; color: #11241f; }
+.rank-3 { background: #b06a3b; color: #f7f1e2; }
+.rank-other { background: #1d3b33; color: #8fa298; border: 1px solid #2c4c43; }
 
-/* Diagonal stripe decoration */
-.diagonal-stripe {
-  background-image: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 5px,
-    rgba(220,38,38,0.06) 5px,
-    rgba(220,38,38,0.06) 6px
-  );
+/* Focus visibility — brass ring everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 2px solid #c9a35e;
+  outline-offset: 2px;
+  border-radius: 2px;
 }

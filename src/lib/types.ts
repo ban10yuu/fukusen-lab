@@ -46,10 +46,11 @@ export const CATEGORY_LABELS: Record<ArticleCategory, string> = {
   timeline: '伏線タイムライン',
 };
 
+// Solid lacquer-seal badges — legible on both ink-green and parchment surfaces
 export const CATEGORY_COLORS: Record<ArticleCategory, string> = {
-  resolved: 'bg-amber-900/40 text-amber-300 border border-amber-700/50',
-  unresolved: 'bg-red-900/40 text-red-300 border border-red-700/50',
-  theory: 'bg-purple-900/40 text-purple-300 border border-purple-700/50',
-  technique: 'bg-emerald-900/40 text-emerald-300 border border-emerald-700/50',
-  timeline: 'bg-blue-900/40 text-blue-300 border border-blue-700/50',
+  resolved: 'bg-[#a4823f] text-[#16100a] border border-[#c9a35e]/60',
+  unresolved: 'bg-[#8a3d2a] text-[#f7f1e2] border border-[#b06a3b]/60',
+  theory: 'bg-[#5b4a6b] text-[#f7f1e2] border border-[#8a76a0]/50',
+  technique: 'bg-[#3d6051] text-[#f7f1e2] border border-[#5d8a75]/50',
+  timeline: 'bg-[#3f5a6b] text-[#f7f1e2] border border-[#6d8da0]/50',
 };

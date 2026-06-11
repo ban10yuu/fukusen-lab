@@ -45,7 +45,7 @@ export default function ShareButtons({ title }: ShareButtonsProps) {
 
   return (
     <div className="flex items-center gap-3 my-6">
-      <span className="text-xs font-bold text-gray-400">共有:</span>
+      <span className="text-xs font-bold text-sepia-500">共有:</span>
 
       {/* X (Twitter) */}
       <button
@@ -90,8 +90,8 @@ export default function ShareButtons({ title }: ShareButtonsProps) {
         onClick={handleCopyLink}
         className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors border ${
           copied
-            ? 'bg-[#dc2626] border-[#dc2626] text-white'
-            : 'bg-[#1a1a28] border-[#1e1e2e] text-gray-400 hover:border-[#dc2626]/40 hover:text-[#dc2626]'
+            ? 'bg-brass border-brass text-ink-deep'
+            : 'bg-parchment-dark border-parchment-line text-sepia-500 hover:border-brass-dark hover:text-copper'
         }`}
         aria-label="リンクをコピー"
         title={copied ? 'コピーしました!' : 'リンクをコピー'}
@@ -109,7 +109,7 @@ export default function ShareButtons({ title }: ShareButtonsProps) {
       </button>
 
       {copied && (
-        <span className="text-xs text-[#dc2626] font-bold animate-pulse">
+        <span className="text-xs text-copper font-bold animate-pulse">
           コピーしました!
         </span>
       )}

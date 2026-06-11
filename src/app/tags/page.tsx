@@ -32,13 +32,13 @@ export default function TagsPage() {
       <div className="mx-auto max-w-7xl px-4 py-8 relative z-10">
         {/* Header */}
         <div className="mb-8">
-          <nav className="text-xs text-gray-600 mb-3 flex items-center gap-1">
-            <Link href="/" className="hover:text-[#dc2626] transition-colors">ホーム</Link>
-            <span className="text-gray-700">/</span>
-            <span className="text-gray-400">タグ一覧</span>
+          <nav className="text-xs text-mist-dim mb-3 flex items-center gap-1">
+            <Link href="/" className="hover:text-brass-light transition-colors">ホーム</Link>
+            <span className="text-ink-line">/</span>
+            <span className="text-mist">タグ一覧</span>
           </nav>
-          <h1 className="text-2xl font-black text-white">タグ一覧</h1>
-          <p className="text-sm text-gray-600 mt-1">
+          <h1 className="study-heading inline-block text-2xl">タグ一覧</h1>
+          <p className="text-sm text-mist-dim mt-2">
             全{tags.length}件のタグから伏線考察記事を探す
           </p>
         </div>
@@ -48,24 +48,23 @@ export default function TagsPage() {
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="flex-1 min-w-0">
             {/* Tag Cloud */}
-            <div className="bg-[#12121c] rounded border-2 border-[#1e1e2e] p-6 md:p-8">
-              <h2 className="text-lg font-black text-white mb-6 flex items-center gap-2">
-                <span className="text-[#dc2626]">▎</span>
+            <div className="paper double-rule p-6 md:p-8">
+              <h2 className="font-serif text-lg font-extrabold text-sepia-900 tracking-wide mb-6 pb-3 border-b border-parchment-line">
                 キーワードタグ
               </h2>
               <div className="flex flex-wrap gap-2">
                 {tags.map(({ tag, count }) => {
                   const ratio = count / maxCount;
                   const size = ratio > 0.7 ? 'text-base' : ratio > 0.4 ? 'text-sm' : 'text-xs';
-                  const brightness = ratio > 0.7 ? 'text-[#dc2626]' : ratio > 0.4 ? 'text-gray-300' : 'text-gray-400';
+                  const brightness = ratio > 0.7 ? 'text-copper' : ratio > 0.4 ? 'text-sepia-900' : 'text-sepia-700';
                   return (
                     <Link
                       key={tag}
                       href={`/tag/${tagToSlug(tag)}`}
-                      className={`${size} ${brightness} font-bold px-3 py-1.5 rounded border border-[#1e1e2e] bg-[#1a1a28] hover:border-[#dc2626] hover:text-[#dc2626] hover:bg-[#dc2626]/5 transition-all`}
+                      className={`${size} ${brightness} font-bold px-3 py-1.5 rounded-sm border border-parchment-line bg-parchment-dark/60 hover:border-brass-dark hover:text-copper hover:bg-parchment-light transition-all`}
                     >
                       #{tag}
-                      <span className="text-[10px] text-gray-600 ml-1">({count})</span>
+                      <span className="text-[10px] text-sepia-500 ml-1">({count})</span>
                     </Link>
                   );
                 })}

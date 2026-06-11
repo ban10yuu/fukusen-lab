@@ -16,14 +16,14 @@ export default function AffiliateWidget({ manga }: { manga: MangaInfo }) {
   const links = getAffiliateLinks(manga);
 
   return (
-    <div className="my-10 bg-gradient-to-br from-[#14141e] to-[#1c1c28] rounded-xl border border-[#282838] p-5 md:p-6">
+    <div className="my-10 panel double-rule p-5 md:p-6">
       {/* Heading */}
       <div className="text-center mb-5">
-        <h3 className="text-base font-black text-[#eaeaf0]">
-          <span className="text-[#dc2626]">{manga.title}</span>
-          <span className="text-[#b0b0c0]"> を読むなら</span>
+        <h3 className="font-serif text-base font-extrabold text-parchment tracking-wide">
+          <span className="text-brass-light">{manga.title}</span>
+          <span className="text-mist"> を読むなら</span>
         </h3>
-        <p className="text-xs text-[#b0b0c0]/60 mt-1">
+        <p className="text-xs text-mist-dim mt-1">
           お得なキャンペーン実施中のサービスをチェック
         </p>
       </div>
@@ -31,7 +31,7 @@ export default function AffiliateWidget({ manga }: { manga: MangaInfo }) {
       {/* 2-column grid of service buttons */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {links.map(link => {
-          const colors = SERVICE_COLORS[link.service] || { bg: '#dc2626', text: '#ffffff' };
+          const colors = SERVICE_COLORS[link.service] || { bg: '#b06a3b', text: '#ffffff' };
           return (
             <a
               key={link.service}
@@ -65,7 +65,7 @@ export default function AffiliateWidget({ manga }: { manga: MangaInfo }) {
       </div>
 
       {/* Disclaimer */}
-      <p className="text-[10px] text-[#b0b0c0]/40 mt-5 text-center">
+      <p className="text-[10px] text-mist-dim/70 mt-5 text-center">
         ※ 当サイトはアフィリエイトプログラムに参加しています。リンク先での購入により当サイトに収益が発生する場合があります。
       </p>
 

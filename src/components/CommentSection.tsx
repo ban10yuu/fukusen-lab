@@ -39,8 +39,8 @@ export default function CommentSection({ articleSlug }: { articleSlug: string })
   };
 
   return (
-    <div className="mt-10 bg-[#14141e] rounded-xl border border-[#282838] p-5">
-      <h3 className="font-black text-base text-[#eaeaf0] mb-4">コメント</h3>
+    <div className="mt-10 double-rule bg-parchment-dark/50 p-5">
+      <h3 className="font-serif font-bold text-base text-sepia-900 tracking-wide mb-4 pb-2 border-b border-parchment-line">コメント</h3>
 
       <form onSubmit={handleSubmit} className="mb-6">
         <input
@@ -48,18 +48,18 @@ export default function CommentSection({ articleSlug }: { articleSlug: string })
           value={name}
           onChange={e => setName(e.target.value)}
           placeholder="名前（任意）"
-          className="w-full bg-[#1c1c28] border border-[#282838] rounded-lg px-4 py-2 text-sm text-[#eaeaf0] placeholder-[#b0b0c0]/40 mb-2 focus:outline-none focus:ring-1 focus:ring-[#dc2626] focus:border-[#dc2626] transition-colors"
+          className="w-full bg-parchment-light border border-parchment-line rounded-sm px-4 py-2 text-sm text-sepia-900 placeholder-sepia-500/60 mb-2 focus:outline-none focus:ring-1 focus:ring-brass-dark focus:border-brass-dark transition-colors"
         />
         <textarea
           value={text}
           onChange={e => setText(e.target.value)}
           placeholder="コメントを書く..."
           rows={3}
-          className="w-full bg-[#1c1c28] border border-[#282838] rounded-lg px-4 py-2 text-sm text-[#eaeaf0] placeholder-[#b0b0c0]/40 mb-2 focus:outline-none focus:ring-1 focus:ring-[#dc2626] focus:border-[#dc2626] resize-none transition-colors"
+          className="w-full bg-parchment-light border border-parchment-line rounded-sm px-4 py-2 text-sm text-sepia-900 placeholder-sepia-500/60 mb-2 focus:outline-none focus:ring-1 focus:ring-brass-dark focus:border-brass-dark resize-none transition-colors"
         />
         <button
           type="submit"
-          className="text-sm font-bold text-white bg-[#dc2626] hover:bg-[#b91c1c] px-5 py-2 rounded-lg transition-colors"
+          className="text-sm font-bold text-parchment-light bg-ink-surface hover:bg-ink-raised border border-brass-dark/50 px-5 py-2 rounded-sm transition-colors"
         >
           投稿する
         </button>
@@ -68,17 +68,17 @@ export default function CommentSection({ articleSlug }: { articleSlug: string })
       {comments.length > 0 ? (
         <div className="space-y-3">
           {comments.map(c => (
-            <div key={c.id} className="bg-[#1c1c28] rounded-lg p-3 border border-[#282838]">
+            <div key={c.id} className="bg-parchment-light rounded-sm p-3 border border-parchment-line">
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-bold text-[#dc2626]">{c.name}</span>
-                <span className="text-[10px] text-[#b0b0c0]/50">{c.date}</span>
+                <span className="text-xs font-bold text-copper">{c.name}</span>
+                <span className="text-[10px] text-sepia-500">{c.date}</span>
               </div>
-              <p className="text-sm text-[#b0b0c0]">{c.text}</p>
+              <p className="text-sm text-sepia-700">{c.text}</p>
             </div>
           ))}
         </div>
       ) : (
-        <p className="text-sm text-[#b0b0c0]/50 text-center py-4">まだコメントはありません</p>
+        <p className="text-sm text-sepia-500 text-center py-4">まだコメントはありません</p>
       )}
     </div>
   );

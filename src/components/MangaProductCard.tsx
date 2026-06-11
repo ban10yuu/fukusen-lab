@@ -17,31 +17,31 @@ export default function MangaProductCard({ manga }: { manga: MangaInfo }) {
   const yahooUrl = `https://shopping.yahoo.co.jp/search?p=${encodeURIComponent(manga.title + ' 1巻 漫画')}`;
 
   return (
-    <div className="my-10 bg-[#14141e] border border-[#282838] rounded-xl overflow-hidden">
+    <div className="my-10 panel double-rule overflow-hidden">
       {/* Color-coded header */}
       <div
         className="px-4 py-3 flex items-center gap-3"
-        style={{ backgroundColor: `${manga.coverColor}20`, borderBottom: `2px solid ${manga.coverColor}` }}
+        style={{ backgroundColor: `${manga.coverColor}1a`, borderBottom: `3px double ${manga.coverColor}` }}
       >
         <span
-          className="w-3 h-3 rounded-full flex-shrink-0"
+          className="w-3 h-3 rounded-full flex-shrink-0 ring-1 ring-black/20"
           style={{ backgroundColor: manga.coverColor }}
         />
-        <h3 className="font-black text-[#eaeaf0] text-base">{manga.title}</h3>
+        <h3 className="font-serif font-extrabold text-parchment text-base tracking-wide">{manga.title}</h3>
       </div>
 
       {/* Product card body */}
       <div className="p-5">
         {/* Manga info */}
         <div className="mb-4">
-          <p className="text-xs text-[#b0b0c0]/60 mb-2">
-            著者: <span className="text-[#b0b0c0]">{manga.author}</span>
+          <p className="text-xs text-mist-dim mb-2">
+            著者: <span className="text-mist">{manga.author}</span>
           </p>
           <div className="flex gap-1.5 flex-wrap">
             {manga.genre.map(g => (
               <span
                 key={g}
-                className="text-[9px] px-2 py-0.5 rounded-full border border-[#282838] text-[#b0b0c0]/70 bg-[#1c1c28]"
+                className="text-[9px] px-2 py-0.5 rounded-full border border-ink-line text-mist-dim bg-ink-raised"
               >
                 {g}
               </span>
@@ -95,7 +95,7 @@ export default function MangaProductCard({ manga }: { manga: MangaInfo }) {
         </div>
       </div>
 
-      <p className="text-[9px] text-[#b0b0c0]/40 text-center pb-3">
+      <p className="text-[9px] text-mist-dim/70 text-center pb-3">
         ※ 当サイトはアフィリエイトプログラムに参加しています
       </p>
 
